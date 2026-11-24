@@ -12,7 +12,7 @@ JPEG-LS 与普通 JPEG 的核心方法不同：它按邻域中值预测样本、
 
 ## 本地运行
 
-需要 MoonBit 工具链。文件工具另需 Node.js 22+，开发用独立互操作脚本另需 Python；核心只依赖 MoonBit 标准库。
+已验证工具链为 moonc `0.10.17+093cb8f9c`，CI 固定同版编译器和标准库。文件工具另需 Node.js 22+，开发用独立互操作脚本另需 Python；核心只依赖 MoonBit 标准库。
 
 ```sh
 moon check --target all --deny-warn
