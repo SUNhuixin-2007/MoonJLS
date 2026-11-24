@@ -1,6 +1,6 @@
 {
-  "recorded_at": "2026-11-24T13:10:30.382744+08:00",
-  "scope": "Local validation only; no remote repository, contest submission or Mooncakes publication",
+  "recorded_at": "2026-11-24T18:22:07.770415+08:00",
+  "scope": "Local validation only; remote CI, registry publication and contest status are recorded separately",
   "platform": "Windows",
   "node": "v24.22.3",
   "toolchain": "moon 0.1.20261021 (a4f8933 2026-10-21) ~\\.moon\\bin\\moon.exe\nmoonc v0.10.17+093cb8f9c (2026-10-21) \\\\?\\C:\\Users\\11619\\.moon\\bin\\moonc.exe\nmoonrun 0.1.20261021 (a4f8933 2026-10-21) \\\\?\\C:\\Users\\11619\\.moon\\bin\\moonrun.exe\n\nFeature flags enabled: rr_moon_mod,rr_moon_pkg",
@@ -362,18 +362,18 @@
     }
   },
   "source_fingerprint": {
-    "sha256": "b55e8e53522dc5f5c55a03649c6c6d73020dce1d9fd0c9743e187d7bb9fa4de1",
+    "sha256": "26ba3541cfbad664cb513ebb4820b5f02b0cc50cd46ec39d1586b3ada58b4abf",
     "files": {
       ".github/workflows/check.yml": "bca84da46286791c706e313f2f66cf171ab069c2581619fccf214b9cb6d1162c",
       "bits.mbt": "6b14047ad59deb84d0de3fdd233c5e6da0e3eb4a53ee5932435f930fae6a16b3",
       "bits_wbtest.mbt": "ff0b4da30a9449c4058f46b629730e8cf43c32f8412ebaac1530d01bad559a75",
       "budgets.mbt": "4bf2347eb15182b471c4e69a577a61fa1157a9d2b15eeb93c4a3d378ef48ed7f",
       "cmd/demo/main.mbt": "6a02bc886a295ba302d8f3cfbb445b21a22875308ee3c0439da820fc6c9b14f6",
-      "cmd/demo/moon.pkg": "7db61d45aa96878116e89a1d8c781eefac0e7ff3e9f4b9595eee10fec4b3b465",
+      "cmd/demo/moon.pkg": "047659f6ed4817ecb27044e43f72efe3f96b9e3761b8c61c4637f6863af5cee8",
       "cmd/interop/main.mbt": "186c10ed12cd7eb1d01724f27ec76797451aac874bf04c4caee6f9dfdfcb3c15",
-      "cmd/interop/moon.pkg": "fb969da7450b4908b1b70d0ee0c455b717efaef42c82a1b1668b6064bcdc9240",
+      "cmd/interop/moon.pkg": "098cc2ccedac974995a03b38b8a5834afd59c9cb94508d206e3c9ea86827c21e",
       "cmd/node/main.mbt": "1bbdccea2da36a307d61da454d5eb23ff51f30a4f38ba057d9351ded8387ae97",
-      "cmd/node/moon.pkg": "86fe3f26094e975290bd4b2dea50e35f75c18e9e51466009115a0b6dda6a9f18",
+      "cmd/node/moon.pkg": "155706a69428a408f6f64300eff929f4a95113b35e28f0f110f2701d6129a1b8",
       "color_transform.mbt": "23ab8f11291148bad67589c9eaedcb09c3235ee8d5aabf1bf62a440cfeeb1e3c",
       "context.mbt": "bd554087df672cd768583c2a41934292010aa118d5cfa916f176ae7fd412cfb8",
       "dimensions.mbt": "ff3121f0b1a5e0db621ef232d32bdfd42f43b59f0ebdd82ceb48bedb2e60d8e0",
@@ -390,7 +390,7 @@
       "integration_wbtest.mbt": "f6a8c23c749a326e0b0f8dd1577c3e907d0cfc019fef8a5c10fbd0afa8969ff3",
       "markers.mbt": "6c01109d880eee590dc33ad258fea00fec77d3f55171ede0a2e89d4283b57200",
       "metadata.mbt": "9c220165e5dbdfa8e76a900c6808b665197c2071ffa763a1c85db51a587f898f",
-      "moon.mod": "b1231e0cec7c90de8f328879c2f7d803fa7fcec364b1d190dec651cc87e39d08",
+      "moon.mod": "a7bbf496a82d6bca0960c2688ae0f5802c58d521de73a2a639183a11885d7ccb",
       "moon.pkg": "0c821463a2c851988325605fcb25d1601ab896502ce1f646dd4cb2664393d14a",
       "package.json": "bc893019cfc417ddb8797f03f4cb7b8c0478035a4daa094feb92dcef586fc497",
       "pam.mbt": "cbbf916277a763ea214a644e8266ac212aebec47d866732a3956c40ece01ebbe",
@@ -409,7 +409,7 @@
       "scripts/moonjls.mjs": "95696d4bce342fcc0e1d83e2469c6b79408311bbd4249d41a0c7fb0b92f78112",
       "scripts/requirements-dev.txt": "845cc708c594c6f2887200d0a71eec5ee0671ff99e5e9ef3c080c17a5be00d07",
       "scripts/test_file_cli.py": "c3ae841e2a5a879af0dc3be0bada78dc3fcd488771845b296e7e9b8d4be3c772",
-      "scripts/validate.py": "4973f8bb88cf93e7d85efdef42a79552e75212744f13abee7675237108d2d68d",
+      "scripts/validate.py": "9e9bdacda188f7a45c17b0ff98748476af81f758924523d5f92fef05565fae83",
       "types.mbt": "18678ecc7000e89898c40e7453c87ff51a585228ddf266661380cc26abb30bd0"
     },
     "scope": "Core/tests, compiler configuration, scripts and fixtures; excludes docs, generated interfaces and build output"
@@ -421,7 +421,7 @@
     "MAXVAL must equal 2^bits_per_sample - 1; other values fail explicitly",
     "Restart/custom-threshold/push encoder cases use independent CharLS decoding; the wrapper cannot generate those exact combinations",
     "Synthetic vectors are not a complete conformance certification or a real clinical/production corpus",
-    "Remote CI configuration has not been executed on a hosting service"
+    "Remote CI execution status is recorded separately in docs/SUBMISSION_STATUS.md"
   ],
   "interop": {
     "oracle": "imagecodecs==2026.11.11",

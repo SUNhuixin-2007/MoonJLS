@@ -26,7 +26,7 @@ python scripts/interop.py
 | 真实文件 | 10 类场景，含中文路径、8/12/16 位、Alpha、近无损、拒绝覆盖与失败输出清理 |
 | 生产规模 | 5,771 物理行；5,153 非空非注释行；4,100 严格有效核心行 |
 | Windows native | NOT_RUN：缺少 MSVC C++ 编译/链接工具和 SDK |
-| 远程 CI | 尚未推送，未在托管服务执行 |
+| 远程 CI | 运行链接及结论见 SUBMISSION_STATUS.md，与本地记录分开 |
 
 工具链为 moon 0.1.20261021、moonc v0.10.17，Node v24.22.3。测试、命令行工具、黄金向量、生成接口与依赖均不计入核心规模。逐文件统计和各命令退出码保存在 JSON 中。
 
@@ -50,7 +50,7 @@ python scripts/interop.py
 
 ## 本地与远程结果区分
 
-CI workflow 文件是复现入口，当前没有远程仓库，因此没有“云端 CI 已通过”的结论。Windows 原生测试若受 C++ 编译器或 SDK 缺失影响，应明确列为未运行或未通过，不能与 Wasm/JS 的结果合并。
+CI workflow 文件是复现入口，远程运行结果另外记录在 SUBMISSION_STATUS.md，不由本地命令通过推导。Windows 原生测试若受 C++ 编译器或 SDK 缺失影响，应明确列为未运行或未通过，不能与 Wasm/JS 的结果合并。
 
 ## 单独列出的组合限制
 

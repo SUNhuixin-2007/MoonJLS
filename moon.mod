@@ -1,8 +1,10 @@
-name = "local/moonjls"
+name = "SHX-ai-nb/moonjls"
 
 version = "0.1.0"
 
 license = "BSD-3-Clause"
+
+repository = "https://github.com/SUNhuixin-2007/MoonJLS"
 
 readme = "README.md"
 

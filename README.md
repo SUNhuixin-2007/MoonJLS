@@ -2,7 +2,7 @@
 
 MoonJLS 是 **纯 MoonBit JPEG-LS 无损与近无损图像编解码库**。它直接处理 2–16 位无符号样本，按 JPEG-LS 的预测、上下文统计和 Golomb 熵编码压缩图像；常见使用对象是科研灰度图、多通道原始图像和需要保留整数样本的 Wasm 工具。
 
-这是独立的新本地工程，保存于 `D:\CodexProjects\MoonJLS`。模块 `local/moonjls` 是开发命名空间，尚未推送、报名或发布。项目范围见 [兼容性清单](docs/COMPATIBILITY.md)，选题与迁移价值见 [申报书](PROPOSAL.md) 和 [生态差异](docs/DIFFERENTIATION.md)。
+项目由 [SUNhuixin-2007](https://github.com/SUNhuixin-2007) 维护，源码仓库为 [MoonJLS](https://github.com/SUNhuixin-2007/MoonJLS)。本地工程保存在 `D:\CodexProjects\MoonJLS`；Mooncakes 命名空间为 `SHX-ai-nb/moonjls`。GitHub 已从 SHX-ai-nb 改名为 SUNhuixin-2007，Mooncakes 保留原用户名，二者归属于同一个 GitHub 账号。项目范围见 [兼容性清单](docs/COMPATIBILITY.md)，选题与迁移价值见 [申报书](PROPOSAL.md) 和 [生态差异](docs/DIFFERENTIATION.md)。
 
 ## 实现方式
 
@@ -61,7 +61,7 @@ let options = { ..@jls.EncodeOptions::default(), near: 3 }
 let packed = @jls.encode(original, options~)
 ```
 
-在自己的 `moon.pkg` 中导入本地模块 `"local/moonjls" @jls`。正式发布前必须将开发命名空间替换为申请人可发布的名称。
+在自己的 `moon.pkg` 中导入 `"SHX-ai-nb/moonjls" @jls`；发布后可用 `moon add SHX-ai-nb/moonjls@0.1.0` 安装。
 
 ## 独立验证
 
@@ -78,7 +78,7 @@ python scripts/interop.py
 python scripts/validate.py
 ```
 
-记录包含三个运行目标各 42 项测试、独立编解码验证与真实文件测试；Windows native 未执行，远程 CI 尚未运行。
+记录包含三个运行目标各 42 项测试、独立编解码验证与真实文件测试；Windows native 未执行，远程 CI 与发布进度见 [发布状态](docs/SUBMISSION_STATUS.md)。
 
 ## 源码规模
 
@@ -96,6 +96,6 @@ python scripts/count_loc.py --minimum 4000
 - [来源与移植范围](THIRD_PARTY.md)：上游版本、版权及依赖。
 - [BSD-3-Clause](LICENSE)：项目许可；保留的 CharLS 原许可见 [docs/CHARLS-LICENSE.md](docs/CHARLS-LICENSE.md)。
 
-本地实现和测试不代表获得 ITU、ISO、AUTOSAR 或医学用途认证。正式提交还需要公开仓库、正确的发布命名空间和比赛要求的后续材料。
+本地实现和测试不代表获得 ITU、ISO、AUTOSAR 或医学用途认证。比赛报名表仍需按官方要求提交；仓库公开和模块发布不等于已经报名或通过审核。
 
 本轮本地代码检查与修复明细见 [LOCAL_REVIEW.md](docs/LOCAL_REVIEW.md)。大尺寸 PNM 文件交换、预算边界和异常输入均有回归测试。

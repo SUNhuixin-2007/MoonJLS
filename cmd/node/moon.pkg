@@ -1,5 +1,5 @@
 import {
-  "local/moonjls" @jls,
+  "SHX-ai-nb/moonjls" @jls,
   "moonbitlang/core/string",
 }
 

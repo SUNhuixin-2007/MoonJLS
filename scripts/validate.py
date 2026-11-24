@@ -102,7 +102,7 @@ def main() -> None:
                    "status": "PASS" if before == after else "FAIL"})
     report = {
         "recorded_at": datetime.now(timezone(timedelta(hours=8))).isoformat(),
-        "scope": "Local validation only; no remote repository, contest submission or Mooncakes publication",
+        "scope": "Local validation only; remote CI, registry publication and contest status are recorded separately",
         "platform": platform.system(), "node": node.stdout.strip(),
         "toolchain": toolchain.stdout.strip(), "checks": checks,
         "source_scale": json.loads(scale.stdout),
@@ -114,7 +114,7 @@ def main() -> None:
             "MAXVAL must equal 2^bits_per_sample - 1; other values fail explicitly",
             "Restart/custom-threshold/push encoder cases use independent CharLS decoding; the wrapper cannot generate those exact combinations",
             "Synthetic vectors are not a complete conformance certification or a real clinical/production corpus",
-            "Remote CI configuration has not been executed on a hosting service",
+            "Remote CI execution status is recorded separately in docs/SUBMISSION_STATUS.md",
         ],
         "interop": json.loads((LOGS / "interop.json").read_text(encoding="utf-8")) if (LOGS / "interop.json").exists() else None,
         "file_cli": json.loads((LOGS / "file_cli.json").read_text(encoding="utf-8")) if (LOGS / "file_cli.json").exists() else None,

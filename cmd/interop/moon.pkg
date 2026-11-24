@@ -1,6 +1,6 @@
 import {
   "moonbitlang/core/buffer",
-  "local/moonjls" @jls,
+  "SHX-ai-nb/moonjls" @jls,
   "moonbitlang/core/env",
   "moonbitlang/core/json",
 }
