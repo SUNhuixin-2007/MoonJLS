@@ -78,7 +78,7 @@ python scripts/interop.py
 python scripts/validate.py
 ```
 
-记录包含三个运行目标各 31 项测试、独立编解码验证与真实文件测试；Windows native 未执行，远程 CI 尚未运行。
+记录包含三个运行目标各 42 项测试、独立编解码验证与真实文件测试；Windows native 未执行，远程 CI 尚未运行。
 
 ## 源码规模
 
@@ -87,7 +87,7 @@ python scripts/count_loc.py
 python scripts/count_loc.py --minimum 4000
 ```
 
-统计将核心、测试、示例工具分开，排除依赖、构建、生成接口、注释和空行；严格口径进一步排除纯结构符号。当前严格有效核心为 **4,026 行**，非空非注释核心为 5,060 行。精确口径与逐文件统计保存在 [本地验证记录](docs/LOCAL_VALIDATION.json)，不承诺主办方采用相同计数方式。
+统计将核心、测试、示例工具分开，排除依赖、构建、生成接口、注释和空行；严格口径进一步排除纯结构符号。当前严格有效核心为 **4,100 行**，非空非注释核心为 5,153 行。精确口径与逐文件统计保存在 [本地验证记录](docs/LOCAL_VALIDATION.json)，不承诺主办方采用相同计数方式。
 
 ## 资料与授权
 
@@ -97,3 +97,5 @@ python scripts/count_loc.py --minimum 4000
 - [BSD-3-Clause](LICENSE)：项目许可；保留的 CharLS 原许可见 [docs/CHARLS-LICENSE.md](docs/CHARLS-LICENSE.md)。
 
 本地实现和测试不代表获得 ITU、ISO、AUTOSAR 或医学用途认证。正式提交还需要公开仓库、正确的发布命名空间和比赛要求的后续材料。
+
+本轮本地代码检查与修复明细见 [LOCAL_REVIEW.md](docs/LOCAL_REVIEW.md)。大尺寸 PNM 文件交换、预算边界和异常输入均有回归测试。

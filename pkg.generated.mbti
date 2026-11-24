@@ -181,7 +181,7 @@ pub(all) struct Info {
 } derive(Eq, @debug.Debug)
 pub fn Info::color_transform(Self) -> ColorTransform raise JlsError
 pub fn Info::spiff_header(Self, limits? : Limits) -> SpiffHeader? raise JlsError
-pub fn Info::to_json(Self, include_metadata? : Bool) -> Json raise JlsError
+pub fn Info::to_json(Self, include_metadata? : Bool, limits? : Limits) -> Json raise JlsError
 
 pub(all) enum Interleave {
   None

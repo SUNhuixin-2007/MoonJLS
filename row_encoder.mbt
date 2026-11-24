@@ -131,6 +131,7 @@ pub fn RowEncoder::new(
       0, "push row encoder requires grayscale NONE or interleaved color",
     )
   }
+  check_encoding_budget(frame, options, preset, limits)
   let header = @buffer.Buffer::Buffer()
   header.write_bytes(b"\xff\xd8"[:])
   write_frame(header, frame, limits)

@@ -168,6 +168,14 @@ pub fn encode_transformed(
   guard preset.maximum == (1 << image.frame.bits_per_sample) - 1 else {
     raise Unsupported(0, "HP encoding requires full-range MAXVAL")
   }
+  check_encoding_budget(
+    image.frame,
+    options,
+    preset,
+    limits,
+    extra_segments=1,
+    metadata_bytes=5,
+  )
   let transformed = image.color_transform(transform, limits~)
   let wire = encode(transformed, options~, limits~)
   let payload = @buffer.Buffer::Buffer()

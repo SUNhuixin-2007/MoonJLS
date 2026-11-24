@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-24T08:37:59.621285+08:00",
+  "recorded_at": "2026-11-24T13:10:30.382744+08:00",
   "scope": "Local validation only; no remote repository, contest submission or Mooncakes publication",
   "platform": "Windows",
   "node": "v24.22.3",
@@ -39,8 +39,8 @@
       "exit_code": 0,
       "status": "PASS",
       "tests": {
-        "total": 31,
-        "passed": 31,
+        "total": 42,
+        "passed": 42,
         "failed": 0
       }
     },
@@ -56,8 +56,8 @@
       "exit_code": 0,
       "status": "PASS",
       "tests": {
-        "total": 31,
-        "passed": 31,
+        "total": 42,
+        "passed": 42,
         "failed": 0
       }
     },
@@ -73,8 +73,8 @@
       "exit_code": 0,
       "status": "PASS",
       "tests": {
-        "total": 31,
-        "passed": 31,
+        "total": 42,
+        "passed": 42,
         "failed": 0
       }
     },
@@ -133,6 +133,10 @@
       "name": "test_native",
       "status": "NOT_RUN",
       "reason": "Windows MSVC C++ compiler/linker and SDK are unavailable in this environment"
+    },
+    {
+      "name": "source_unchanged_during_validation",
+      "status": "PASS"
     }
   ],
   "source_scale": {
@@ -147,14 +151,14 @@
     ],
     "totals": {
       "core": {
-        "physical": 5675,
-        "code_nonblank": 5060,
-        "effective_strict": 4026
+        "physical": 5771,
+        "code_nonblank": 5153,
+        "effective_strict": 4100
       },
       "tests": {
-        "physical": 1102,
-        "code_nonblank": 1036,
-        "effective_strict": 807
+        "physical": 1402,
+        "code_nonblank": 1314,
+        "effective_strict": 1009
       },
       "examples_and_tools": {
         "physical": 404,
@@ -171,10 +175,16 @@
           "effective_strict": 205
         },
         {
+          "path": "budgets.mbt",
+          "physical": 34,
+          "code_nonblank": 31,
+          "effective_strict": 24
+        },
+        {
           "path": "color_transform.mbt",
-          "physical": 184,
-          "code_nonblank": 164,
-          "effective_strict": 130
+          "physical": 192,
+          "code_nonblank": 172,
+          "effective_strict": 137
         },
         {
           "path": "context.mbt",
@@ -208,21 +218,21 @@
         },
         {
           "path": "image_ops.mbt",
-          "physical": 522,
-          "code_nonblank": 466,
-          "effective_strict": 380
+          "physical": 526,
+          "code_nonblank": 470,
+          "effective_strict": 383
         },
         {
           "path": "info_json.mbt",
-          "physical": 68,
-          "code_nonblank": 61,
-          "effective_strict": 43
+          "physical": 69,
+          "code_nonblank": 62,
+          "effective_strict": 44
         },
         {
           "path": "markers.mbt",
-          "physical": 505,
-          "code_nonblank": 469,
-          "effective_strict": 372
+          "physical": 518,
+          "code_nonblank": 482,
+          "effective_strict": 383
         },
         {
           "path": "metadata.mbt",
@@ -244,15 +254,15 @@
         },
         {
           "path": "pnm.mbt",
-          "physical": 247,
-          "code_nonblank": 222,
-          "effective_strict": 174
+          "physical": 262,
+          "code_nonblank": 237,
+          "effective_strict": 185
         },
         {
           "path": "pnm_source.mbt",
-          "physical": 378,
-          "code_nonblank": 333,
-          "effective_strict": 257
+          "physical": 390,
+          "code_nonblank": 345,
+          "effective_strict": 266
         },
         {
           "path": "rate_control.mbt",
@@ -268,21 +278,21 @@
         },
         {
           "path": "restart.mbt",
-          "physical": 179,
-          "code_nonblank": 165,
-          "effective_strict": 134
+          "physical": 186,
+          "code_nonblank": 172,
+          "effective_strict": 140
         },
         {
           "path": "row_encoder.mbt",
-          "physical": 198,
-          "code_nonblank": 174,
-          "effective_strict": 139
+          "physical": 199,
+          "code_nonblank": 175,
+          "effective_strict": 140
         },
         {
           "path": "rows.mbt",
-          "physical": 103,
-          "code_nonblank": 93,
-          "effective_strict": 74
+          "physical": 104,
+          "code_nonblank": 94,
+          "effective_strict": 75
         },
         {
           "path": "scan.mbt",
@@ -303,6 +313,12 @@
           "physical": 81,
           "code_nonblank": 76,
           "effective_strict": 60
+        },
+        {
+          "path": "hardening_wbtest.mbt",
+          "physical": 300,
+          "code_nonblank": 278,
+          "effective_strict": 202
         },
         {
           "path": "image_wbtest.mbt",
@@ -344,6 +360,59 @@
         }
       ]
     }
+  },
+  "source_fingerprint": {
+    "sha256": "b55e8e53522dc5f5c55a03649c6c6d73020dce1d9fd0c9743e187d7bb9fa4de1",
+    "files": {
+      ".github/workflows/check.yml": "bca84da46286791c706e313f2f66cf171ab069c2581619fccf214b9cb6d1162c",
+      "bits.mbt": "6b14047ad59deb84d0de3fdd233c5e6da0e3eb4a53ee5932435f930fae6a16b3",
+      "bits_wbtest.mbt": "ff0b4da30a9449c4058f46b629730e8cf43c32f8412ebaac1530d01bad559a75",
+      "budgets.mbt": "4bf2347eb15182b471c4e69a577a61fa1157a9d2b15eeb93c4a3d378ef48ed7f",
+      "cmd/demo/main.mbt": "6a02bc886a295ba302d8f3cfbb445b21a22875308ee3c0439da820fc6c9b14f6",
+      "cmd/demo/moon.pkg": "7db61d45aa96878116e89a1d8c781eefac0e7ff3e9f4b9595eee10fec4b3b465",
+      "cmd/interop/main.mbt": "186c10ed12cd7eb1d01724f27ec76797451aac874bf04c4caee6f9dfdfcb3c15",
+      "cmd/interop/moon.pkg": "fb969da7450b4908b1b70d0ee0c455b717efaef42c82a1b1668b6064bcdc9240",
+      "cmd/node/main.mbt": "1bbdccea2da36a307d61da454d5eb23ff51f30a4f38ba057d9351ded8387ae97",
+      "cmd/node/moon.pkg": "86fe3f26094e975290bd4b2dea50e35f75c18e9e51466009115a0b6dda6a9f18",
+      "color_transform.mbt": "23ab8f11291148bad67589c9eaedcb09c3235ee8d5aabf1bf62a440cfeeb1e3c",
+      "context.mbt": "bd554087df672cd768583c2a41934292010aa118d5cfa916f176ae7fd412cfb8",
+      "dimensions.mbt": "ff3121f0b1a5e0db621ef232d32bdfd42f43b59f0ebdd82ceb48bedb2e60d8e0",
+      "fixtures/README.md": "cfcd45ce28dc74d185e5a8d8f6b5ee3f68a25fc028897663ac4419ee7f26f484",
+      "fixtures/charls-golden.json": "54e28bb1e8e04a7722073fb7c926a89aeca53b4cfd5c8808cde2677d752c3f05",
+      "fixtures/gray8.jls": "975ff8aad354e5e31dad78e4bdafbddadfdb1dfa54e75a10a8c2b62d129c6ce6",
+      "framer.mbt": "2b31b18b6bb4c78de91852326968741d4bd78e21b188af44924619d9686ef8b2",
+      "hardening_wbtest.mbt": "f18a2e7a46ed4d8871bd8f9ac8c692fba91346d0f2e8e4f115d4327a65230eb0",
+      "histogram.mbt": "59802ab3e6eb33dd1844290598e42d25e4a8d50b04a874242939e5d1f6c27901",
+      "image_json.mbt": "542a2d4a8e940f252a581c4a5d577f04a1f2961bb8fb022f57e8205068eed25b",
+      "image_ops.mbt": "521eca25834e182792526e5980c06d8183e59928ba76beffd0cacbbed1b9c464",
+      "image_wbtest.mbt": "24f12db89290000e286da2903cf3c0d32dc55363c9d77f8c9b21a723105bca3b",
+      "info_json.mbt": "66013ff2eec2b322695a6da9d21a33f8fea17ecdf8c6884d30c204869b0723b2",
+      "integration_wbtest.mbt": "f6a8c23c749a326e0b0f8dd1577c3e907d0cfc019fef8a5c10fbd0afa8969ff3",
+      "markers.mbt": "6c01109d880eee590dc33ad258fea00fec77d3f55171ede0a2e89d4283b57200",
+      "metadata.mbt": "9c220165e5dbdfa8e76a900c6808b665197c2071ffa763a1c85db51a587f898f",
+      "moon.mod": "b1231e0cec7c90de8f328879c2f7d803fa7fcec364b1d190dec651cc87e39d08",
+      "moon.pkg": "0c821463a2c851988325605fcb25d1601ab896502ce1f646dd4cb2664393d14a",
+      "package.json": "bc893019cfc417ddb8797f03f4cb7b8c0478035a4daa094feb92dcef586fc497",
+      "pam.mbt": "cbbf916277a763ea214a644e8266ac212aebec47d866732a3956c40ece01ebbe",
+      "parameters.mbt": "392d72461990357d75e7944981b658eff23b97ef1ba156b49ba707bca5eb17c4",
+      "pnm.mbt": "b43cedc3936547fb534489b29b3ac793fe6210e37b9058a59afc25ba2bc617b3",
+      "pnm_source.mbt": "83d48de4d5f668507a4b908a2aaee6f504778cf69b3f2fc0114f51ba494bbe8b",
+      "rate_control.mbt": "dcd2e1a65bd6b2074a6bb4bad789195a3f4f4ee59417a51bc880bdd928b19b56",
+      "region.mbt": "72840afad51ce2ad5a73a6ab8d9e12bced00529889ab92bbe29a98f90b436799",
+      "restart.mbt": "599aebffdec1c82be0e807701faa92e576f6dbd87d06d7a2a024c0748432ef69",
+      "row_encoder.mbt": "d9ced0489e3ed5ec0732c0e3a47f7e9eb67265ff8f0e8379af2da009623f22e4",
+      "rows.mbt": "29cbe19512149fef42d975060509b7acfa97b7b6fa0b73cdbf4a83cbef8744df",
+      "scan.mbt": "7e27ada0c34d92c597f15ac2e68b7b519f7683f5033f3ec381f525b397314390",
+      "scan_wbtest.mbt": "a346cfd8b240ebd1b64c475b4bad2cc25be9d77e1aa8b288517eaf2727639838",
+      "scripts/count_loc.py": "9ec90e847f12e17f43090064e5aed513b980f8ac64815f56f8218b4487294dcf",
+      "scripts/interop.py": "aa7b2477bcb3e72681cc295a3ac8cba8ad3eb96222ffcccb824a993412f00298",
+      "scripts/moonjls.mjs": "95696d4bce342fcc0e1d83e2469c6b79408311bbd4249d41a0c7fb0b92f78112",
+      "scripts/requirements-dev.txt": "845cc708c594c6f2887200d0a71eec5ee0671ff99e5e9ef3c080c17a5be00d07",
+      "scripts/test_file_cli.py": "c3ae841e2a5a879af0dc3be0bada78dc3fcd488771845b296e7e9b8d4be3c772",
+      "scripts/validate.py": "4973f8bb88cf93e7d85efdef42a79552e75212744f13abee7675237108d2d68d",
+      "types.mbt": "18678ecc7000e89898c40e7453c87ff51a585228ddf266661380cc26abb30bd0"
+    },
+    "scope": "Core/tests, compiler configuration, scripts and fixtures; excludes docs, generated interfaces and build output"
   },
   "limitations": [
     "Native execution is not validated on this Windows host without MSVC C++ compiler and SDK",
@@ -395,6 +464,8 @@
       "8位 4通道 n1 sample",
       "8位 2通道 n0 none",
       "8位 3通道 n0 none",
+      "wide PNM/JPEG-LS 65536x1 8-bit exact roundtrip",
+      "wide PNM/JPEG-LS 65536x1 16-bit exact roundtrip",
       "ASCII input and explicit PAM export",
       "truncated/invalid inputs, unsupported MAXVAL, option rejection and partial-output cleanup"
     ],

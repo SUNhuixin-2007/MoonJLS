@@ -91,8 +91,10 @@ fn entropy_end(
   data : BytesView,
   start : Int32,
   restart_interval : Int32,
-) -> Int32 raise JlsError {
+  maximum_markers : Int32,
+) -> (Int32, Int32) raise JlsError {
   let mut at = start
+  let mut restart_markers = 0
   while at < data.length() {
     if data[at] != b'\xff' {
       at += 1
@@ -114,10 +116,14 @@ fn entropy_end(
       guard restart_interval > 0 else {
         raise Invalid(at, "restart marker without restart interval")
       }
+      guard restart_markers < maximum_markers else {
+        raise Limit(at, "restart markers exceed segment budget")
+      }
+      restart_markers += 1
       at = code_at + 1
       continue
     }
-    return marker_start
+    return (marker_start, restart_markers)
   }
   raise Truncated(at, "scan has no following marker")
 }
@@ -290,7 +296,13 @@ pub fn inspect(
         )
       }
       ignore(frame.sample_count(limits~))
-      let end = entropy_end(data, at, restart_interval)
+      let (end, restart_markers) = entropy_end(
+        data,
+        at,
+        restart_interval,
+        limits.segments - segment_count,
+      )
+      segment_count += restart_markers
       let scan = read_scan(
         payload, payload_at, frame, frame_ids, preset, at, end, restart_interval,
       )
@@ -414,6 +426,7 @@ pub fn encode(
   guard image.frame.components > 1 || options.interleave == None else {
     raise Invalid(0, "single-component frames require noninterleaved mode")
   }
+  check_encoding_budget(image.frame, options, preset, limits)
   let out = @buffer.Buffer::Buffer()
   out.write_bytes(b"\xff\xd8"[:])
   write_frame(out, image.frame, limits)

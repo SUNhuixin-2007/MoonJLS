@@ -71,6 +71,24 @@ def main() -> None:
             assert source.read_bytes() == header.encode("ascii") + payload
             checks.append(name)
 
+        for bits in (8, 16):
+            width = 65536
+            source = base / f"wide-{bits}.pgm"
+            packed = base / f"wide-{bits}.jls"
+            restored = base / f"wide-{bits}-restored.pgm"
+            pixels = np.full(width, 35, dtype=np.uint8 if bits == 8 else np.uint16)
+            payload = pixels.astype("u1" if bits == 8 else ">u2").tobytes()
+            header = f"P5\n{width} 1\n{(1 << bits) - 1}\n".encode("ascii")
+            source.write_bytes(header + payload)
+            encoded = call("encode", source, packed)
+            assert encoded["frame"]["width"] == width
+            assert encoded["full_pixel_array"] is False
+            independent = imagecodecs.jpegls_decode(packed.read_bytes()).reshape(-1)
+            assert np.array_equal(independent, pixels)
+            call("decode", packed, restored)
+            assert restored.read_bytes() == source.read_bytes()
+            checks.append(f"wide PNM/JPEG-LS {width}x1 {bits}-bit exact roundtrip")
+
         ascii_source = base / "ascii.pgm"
         ascii_source.write_bytes(b"P2\n3 1\n255\n0 10 255\n")
         ascii_wire = base / "ascii.jls"

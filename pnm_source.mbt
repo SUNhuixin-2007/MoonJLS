@@ -181,6 +181,9 @@ pub fn PnmSource::open(
   guard start <= source.size && limits.metadata_bytes >= 3 else {
     raise Invalid(0, "invalid PNM source start or header budget")
   }
+  guard source.size - start <= limits.compressed_bytes.to_uint64() else {
+    raise Limit(0, "PNM source raster exceeds input byte budget")
+  }
   let cursor = {
     source,
     start,
@@ -199,8 +202,8 @@ pub fn PnmSource::open(
   guard pnm_whitespace(cursor.take()) else {
     raise Invalid(2, "PNM magic requires whitespace")
   }
-  let width = cursor.decimal(65535)
-  let height = cursor.decimal(65535)
+  let width = cursor.decimal(2147483645)
+  let height = cursor.decimal(2147483647)
   let maximum = cursor.decimal(65535)
   guard maximum >= 1 else {
     raise Invalid(cursor.position, "PNM MAXVAL must be positive")
@@ -227,6 +230,12 @@ pub fn PnmSource::open(
   }
   let count = frame.sample_count(limits~)
   let sample_bytes = if maximum < 256 { 1 } else { 2 }
+  let row_bytes = width.to_int64() *
+    frame.components.to_int64() *
+    sample_bytes.to_int64()
+  guard row_bytes <= limits.compressed_bytes.to_int64() else {
+    raise Limit(0, "PNM source row exceeds byte budget")
+  }
   let raster_offset = start + cursor.position.to_uint64()
   let payload_length = count.to_uint64() * sample_bytes.to_uint64()
   guard raster_offset <= source.size &&
@@ -241,7 +250,7 @@ pub fn PnmSource::open(
     frame,
     maximum,
     raster_offset,
-    row_bytes: width * frame.components * sample_bytes,
+    row_bytes: row_bytes.to_int(),
     sample_bytes,
     limits,
   }
@@ -350,6 +359,9 @@ pub fn write_pnm_rows(
   let header = @utf8.encode(
     "\{magic}\n\{frame.width} \{frame.height}\n\{maximum}\n",
   )
+  guard header.length() <= limits.metadata_bytes else {
+    raise Limit(0, "PNM row header exceeds metadata budget")
+  }
   let sample_bytes = if maximum < 256 { 1 } else { 2 }
   let total = header.length().to_uint64() +
     count.to_uint64() * sample_bytes.to_uint64()

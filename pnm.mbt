@@ -10,6 +10,7 @@ pub(all) struct PnmImage {
 priv struct PnmCursor {
   data : BytesView
   mut position : Int32
+  mut bound : Int32
 }
 
 ///|
@@ -23,8 +24,11 @@ fn pnm_whitespace(byte : Byte) -> Bool {
 }
 
 ///|
-fn PnmCursor::skip_space(self : PnmCursor) -> Unit {
+fn PnmCursor::skip_space(self : PnmCursor) -> Unit raise JlsError {
   while self.position < self.data.length() {
+    guard self.position < self.bound else {
+      raise Limit(self.position, "PNM header exceeds metadata budget")
+    }
     let byte = self.data[self.position]
     if pnm_whitespace(byte) {
       self.position += 1
@@ -33,6 +37,12 @@ fn PnmCursor::skip_space(self : PnmCursor) -> Unit {
       while self.position < self.data.length() &&
             self.data[self.position] != b'\r' &&
             self.data[self.position] != b'\n' {
+        guard self.position < self.bound else {
+          raise Limit(
+            self.position,
+            "PNM header comment exceeds metadata budget",
+          )
+        }
         self.position += 1
       }
     } else {
@@ -50,6 +60,9 @@ fn PnmCursor::number(self : PnmCursor, maximum : Int32) -> Int32 raise JlsError 
   }
   let mut value = 0
   while self.position < self.data.length() {
+    guard self.position < self.bound else {
+      raise Limit(self.position, "PNM header exceeds metadata budget")
+    }
     let byte = self.data[self.position]
     if pnm_whitespace(byte) || byte == b'#' {
       break
@@ -100,16 +113,34 @@ pub fn parse_pnm(
   guard pnm_whitespace(data[2]) else {
     raise Invalid(2, "PNM magic needs a whitespace separator")
   }
-  let cursor = { data, position: 2, }
-  let width = cursor.number(65535)
-  let height = cursor.number(65535)
+  let cursor = {
+    data,
+    position: 2,
+    bound: limits.metadata_bytes.min(data.length()),
+  }
+  let width = cursor.number(2147483645)
+  let height = cursor.number(2147483647)
   let maximum = cursor.number(65535)
   guard width > 0 && height > 0 && maximum > 0 else {
     raise Invalid(cursor.position, "PNM dimensions and MAXVAL must be positive")
   }
+  guard cursor.position < data.length() else {
+    raise Truncated(cursor.position, "missing raster separator")
+  }
+  guard pnm_whitespace(data[cursor.position]) else {
+    raise Invalid(cursor.position, "PNM raster needs one whitespace separator")
+  }
+  let separator = data[cursor.position]
+  cursor.position += 1
+  if separator == b'\r' &&
+    cursor.position < data.length() &&
+    data[cursor.position] == b'\n' {
+    cursor.position += 1
+  }
   guard cursor.position <= limits.metadata_bytes else {
     raise Limit(cursor.position, "PNM header exceeds metadata budget")
   }
+  cursor.bound = data.length()
   let components = if kind == b'3' || kind == b'6' { 3 } else { 1 }
   let frame = {
     width,
@@ -128,22 +159,6 @@ pub fn parse_pnm(
       raise Invalid(cursor.position, "trailing PNM samples or images")
     }
   } else {
-    guard cursor.position < data.length() else {
-      raise Truncated(cursor.position, "missing binary raster separator")
-    }
-    guard pnm_whitespace(data[cursor.position]) else {
-      raise Invalid(
-        cursor.position,
-        "binary PNM raster needs one whitespace separator",
-      )
-    }
-    let separator = data[cursor.position]
-    cursor.position += 1
-    if separator == b'\r' &&
-      cursor.position < data.length() &&
-      data[cursor.position] == b'\n' {
-      cursor.position += 1
-    }
     let bytes_per_sample = if maximum < 256 { 1 } else { 2 }
     guard count <= limits.compressed_bytes / bytes_per_sample else {
       raise Limit(cursor.position, "PNM raster exceeds byte budget")

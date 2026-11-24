@@ -13,6 +13,7 @@ pub fn encode_rows(
   guard frame.components > 1 || options.interleave == None else {
     raise Invalid(0, "single component requires noninterleaved mode")
   }
+  check_encoding_budget(frame, options, preset, limits)
   let out = @buffer.Buffer::Buffer()
   out.write_bytes(b"\xff\xd8"[:])
   write_frame(out, frame, limits)

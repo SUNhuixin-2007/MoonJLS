@@ -28,8 +28,9 @@ pub fn SpiffHeader::to_json(self : SpiffHeader) -> Json {
 pub fn Info::to_json(
   self : Info,
   include_metadata~ : Bool = false,
+  limits~ : Limits = Limits::default(),
 ) -> Json raise JlsError {
-  let spiff : Json = match self.spiff_header() {
+  let spiff : Json = match self.spiff_header(limits~) {
     None => Json::null()
     Some(header) => header.to_json()
   }

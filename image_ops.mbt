@@ -61,7 +61,11 @@ fn image_layout(
   }
   let row_samples = frame.width *
     (if layout.order == Interleaved { frame.components } else { 1 })
-  let row_bytes = row_samples * sample_bytes
+  let row_bytes64 = row_samples.to_int64() * sample_bytes.to_int64()
+  guard row_bytes64 <= limits.compressed_bytes.to_int64() else {
+    raise Limit(0, "packed row exceeds byte budget")
+  }
+  let row_bytes = row_bytes64.to_int()
   let row_stride = if layout.row_stride == 0 {
     row_bytes
   } else {

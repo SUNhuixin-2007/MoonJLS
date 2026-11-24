@@ -115,6 +115,13 @@ pub fn encode_restarted(
   guard frame.components > 1 || options.interleave == None else {
     raise Invalid(0, "grayscale requires noninterleaved mode")
   }
+  check_encoding_budget(
+    frame,
+    options,
+    preset,
+    limits,
+    restart_interval=interval,
+  )
   let out = @buffer.Buffer::Buffer()
   out.write_bytes(b"\xff\xd8"[:])
   write_frame(out, frame, limits)
