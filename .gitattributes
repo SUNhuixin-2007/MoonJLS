@@ -1,0 +1,4 @@
+* text=auto eol=lf
+*.jls binary
+*.pgm binary
+*.ppm binary

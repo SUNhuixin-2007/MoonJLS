@@ -1,0 +1,5 @@
+/_build/
+/.mooncakes/
+/work/
+/out/
+__pycache__/
