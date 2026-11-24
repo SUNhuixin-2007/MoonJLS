@@ -1,0 +1,361 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "local/moonjls"
+
+import {
+  "moonbitlang/core/buffer",
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn compare_images(Image, Image, limits? : Limits) -> ErrorMetrics raise JlsError
+
+pub fn decode(BytesView, limits? : Limits) -> Image raise JlsError
+
+pub fn decode_region(BytesView, Region, components? : Array[Int32], limits? : Limits) -> Image raise JlsError
+
+pub fn decode_rows(BytesView, (Int32, Array[Int32], Array[Int32]) -> Unit raise JlsError, limits? : Limits) -> Info raise JlsError
+
+pub fn encode(Image, options? : EncodeOptions, limits? : Limits) -> Bytes raise JlsError
+
+pub fn encode_pam(Image, maximum? : Int32, tuple_type? : String, limits? : Limits) -> Bytes raise JlsError
+
+pub fn encode_pnm(Image, maximum? : Int32, ascii? : Bool, limits? : Limits) -> Bytes raise JlsError
+
+pub fn encode_restarted(Image, Int32, options? : EncodeOptions, limits? : Limits) -> Bytes raise JlsError
+
+pub fn encode_rows(Frame, (Int32, Array[Int32]) -> Array[Int32] raise JlsError, options? : EncodeOptions, limits? : Limits) -> Bytes raise JlsError
+
+pub fn encode_to_budget(Image, Int32, Array[Int32], Array[Interleave], maximum_attempts? : Int32, work_sample_budget? : UInt64, limits? : Limits) -> EncodingChoice? raise JlsError
+
+pub fn encode_transformed(Image, ColorTransform, options? : EncodeOptions, limits? : Limits) -> Bytes raise JlsError
+
+pub fn hex_decode(String) -> Bytes raise JlsError
+
+pub fn hex_encode(BytesView) -> String
+
+pub fn inspect(BytesView, limits? : Limits) -> Info raise JlsError
+
+pub fn merge_planes(ArrayView[Image], limits? : Limits) -> Image raise JlsError
+
+pub fn parse_pam(BytesView, limits? : Limits) -> PamImage raise JlsError
+
+pub fn parse_pnm(BytesView, limits? : Limits) -> PnmImage raise JlsError
+
+pub fn rate_curve(Image, Array[Int32], Array[Interleave], maximum_attempts? : Int32, work_sample_budget? : UInt64, limits? : Limits) -> Array[RatePoint] raise JlsError
+
+pub fn strip_metadata(BytesView, limits? : Limits) -> Bytes raise JlsError
+
+pub fn tile_regions(Frame, Int32, Int32, maximum_tiles? : Int32) -> Array[Region] raise JlsError
+
+pub fn verify_near(Image, Image, Int32, limits? : Limits) -> ErrorMetrics raise JlsError
+
+pub fn with_metadata(BytesView, Array[Segment], limits? : Limits) -> Bytes raise JlsError
+
+pub fn with_spiff(BytesView, SpiffHeader, limits? : Limits) -> Bytes raise JlsError
+
+pub fn write_pam_rows(Frame, (Int32) -> Array[Int32] raise JlsError, (Bytes) -> Unit raise JlsError, maximum? : Int32, tuple_type? : String, limits? : Limits) -> UInt64 raise JlsError
+
+pub fn write_pnm_rows(Frame, (Int32) -> Array[Int32] raise JlsError, (Bytes) -> Unit raise JlsError, maximum? : Int32, limits? : Limits) -> UInt64 raise JlsError
+
+// Errors
+pub(all) suberror JlsError {
+  Invalid(Int32, String)
+  Truncated(Int32, String)
+  Unsupported(Int32, String)
+  Limit(Int32, String)
+}
+pub fn JlsError::describe(Self) -> String
+
+// Types and methods
+pub struct ByteSource {
+  size : UInt64
+  read_at : (UInt64, Int32) -> Bytes raise JlsError
+}
+pub fn ByteSource::from_bytes(Bytes) -> Self
+pub fn ByteSource::new(UInt64, (UInt64, Int32) -> Bytes raise JlsError) -> Self
+pub fn ByteSource::read(Self, UInt64, Int32) -> Bytes raise JlsError
+pub fn ByteSource::size(Self) -> UInt64
+pub fn ByteSource::slice(Self, UInt64, UInt64) -> Self raise JlsError
+
+pub(all) struct ChannelMetrics {
+  component : Int32
+  samples : Int32
+  maximum_error : Int32
+  mean_error : Double
+  mean_absolute_error : Double
+  mean_squared_error : Double
+} derive(Eq, @debug.Debug)
+
+pub struct CodestreamFramer {
+  limits : Limits
+  batch_images : Int32
+  buffer : @buffer.Buffer
+  mut state : FramingState
+  mut marker : Int32
+  mut length : Int32
+  mut remaining : Int32
+  mut images : UInt64
+  mut received : UInt64
+  mut closed : Bool
+  mut failed : Bool
+}
+pub fn CodestreamFramer::buffered_bytes(Self) -> Int32
+pub fn CodestreamFramer::feed(Self, BytesView) -> Array[Bytes] raise JlsError
+pub fn CodestreamFramer::finish(Self) -> Unit raise JlsError
+pub fn CodestreamFramer::image_count(Self) -> UInt64
+pub fn CodestreamFramer::input_bytes(Self) -> UInt64
+pub fn CodestreamFramer::new(limits? : Limits, batch_images? : Int32) -> Self raise JlsError
+pub fn CodestreamFramer::reset(Self) -> Unit
+
+pub(all) enum ColorTransform {
+  Identity
+  Hp1
+  Hp2
+  Hp3
+} derive(Eq, @debug.Debug)
+pub fn ColorTransform::code(Self) -> Int32
+pub fn ColorTransform::from_code(Int32) -> Self raise JlsError
+
+pub(all) struct EncodeOptions {
+  near : Int32
+  interleave : Interleave
+  preset : Preset
+} derive(Eq, @debug.Debug)
+pub fn EncodeOptions::default() -> Self
+pub fn EncodeOptions::from_json(Json) -> Self raise JlsError
+pub fn EncodeOptions::to_json(Self) -> Json
+
+pub(all) struct EncodingChoice {
+  point : RatePoint
+  codestream : Bytes
+  attempts : Int32
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ErrorMetrics {
+  samples : Int32
+  maximum_error : Int32
+  mean_error : Double
+  mean_absolute_error : Double
+  mean_squared_error : Double
+  channels : Array[ChannelMetrics]
+} derive(Eq, @debug.Debug)
+pub fn ErrorMetrics::psnr(Self, Int32) -> Double? raise JlsError
+pub fn ErrorMetrics::to_json(Self) -> Json
+pub fn ErrorMetrics::within_near(Self, Int32) -> Bool raise JlsError
+
+pub(all) struct Frame {
+  width : Int32
+  height : Int32
+  bits_per_sample : Int32
+  components : Int32
+} derive(Eq, @debug.Debug)
+pub fn Frame::from_json(Json, limits? : Limits) -> Self raise JlsError
+pub fn Frame::packed_size(Self, PixelLayout, limits? : Limits) -> Int32 raise JlsError
+pub fn Frame::sample_count(Self, limits? : Limits) -> Int32 raise JlsError
+pub fn Frame::to_json(Self) -> Json
+
+type FramingState
+
+pub(all) struct Image {
+  frame : Frame
+  samples : Array[Int32]
+} derive(Eq, @debug.Debug)
+pub fn Image::color_transform(Self, ColorTransform, inverse? : Bool, limits? : Limits) -> Self raise JlsError
+pub fn Image::copy_row_into(Self, Int32, Array[Int32], components? : Array[Int32], limits? : Limits) -> Unit raise JlsError
+pub fn Image::crop(Self, Int32, Int32, Int32, Int32, limits? : Limits) -> Self raise JlsError
+pub fn Image::from_json(Json, limits? : Limits) -> Self raise JlsError
+pub fn Image::from_packed(Frame, BytesView, layout? : PixelLayout, limits? : Limits) -> Self raise JlsError
+pub fn Image::plane(Self, Int32, limits? : Limits) -> Self raise JlsError
+pub fn Image::row(Self, Int32, limits? : Limits) -> Array[Int32] raise JlsError
+pub fn Image::sample(Self, Int32, Int32, component? : Int32, limits? : Limits) -> Int32 raise JlsError
+pub fn Image::to_json(Self) -> Json
+pub fn Image::to_packed(Self, layout? : PixelLayout, limits? : Limits) -> Bytes raise JlsError
+pub fn Image::validate(Self, maximum? : Int32, limits? : Limits) -> Unit raise JlsError
+pub fn Image::with_plane(Self, Int32, Self, limits? : Limits) -> Self raise JlsError
+
+pub(all) struct Info {
+  frame : Frame
+  scans : Array[ScanInfo]
+  metadata : Array[Segment]
+  consumed : Int32
+} derive(Eq, @debug.Debug)
+pub fn Info::color_transform(Self) -> ColorTransform raise JlsError
+pub fn Info::spiff_header(Self, limits? : Limits) -> SpiffHeader? raise JlsError
+pub fn Info::to_json(Self, include_metadata? : Bool) -> Json raise JlsError
+
+pub(all) enum Interleave {
+  None
+  Line
+  Sample
+} derive(Eq, @debug.Debug)
+pub fn Interleave::code(Self) -> Int32
+
+pub(all) struct Limits {
+  pixels : Int32
+  samples : Int32
+  compressed_bytes : Int32
+  metadata_bytes : Int32
+  segments : Int32
+} derive(Eq, @debug.Debug)
+pub fn Limits::default() -> Self
+
+pub(all) struct PamImage {
+  image : Image
+  maximum : Int32
+  tuple_type : String
+} derive(Eq, @debug.Debug)
+pub fn PamImage::encode(Self, limits? : Limits) -> Bytes raise JlsError
+pub fn PamImage::validate(Self, limits? : Limits) -> Unit raise JlsError
+
+pub(all) struct PixelLayout {
+  order : PixelOrder
+  storage : SampleStorage
+  row_stride : Int32
+  plane_stride : Int32
+} derive(Eq, @debug.Debug)
+pub fn PixelLayout::from_json(Json) -> Self raise JlsError
+pub fn PixelLayout::tight(storage? : SampleStorage, order? : PixelOrder) -> Self
+pub fn PixelLayout::to_json(Self) -> Json
+
+pub(all) enum PixelOrder {
+  Interleaved
+  Planar
+} derive(Eq, @debug.Debug)
+
+pub(all) struct PnmImage {
+  image : Image
+  maximum : Int32
+} derive(Eq, @debug.Debug)
+pub fn PnmImage::encode(Self, ascii? : Bool, limits? : Limits) -> Bytes raise JlsError
+
+pub struct PnmSource {
+  source : ByteSource
+  frame : Frame
+  maximum : Int32
+  raster_offset : UInt64
+  row_bytes : Int32
+  sample_bytes : Int32
+  limits : Limits
+}
+pub fn PnmSource::encode(Self, options? : EncodeOptions) -> Bytes raise JlsError
+pub fn PnmSource::frame(Self) -> Frame
+pub fn PnmSource::maximum(Self) -> Int32
+pub fn PnmSource::open(ByteSource, start? : UInt64, limits? : Limits) -> Self raise JlsError
+pub fn PnmSource::raster_offset(Self) -> UInt64
+pub fn PnmSource::row(Self, Int32, components? : Array[Int32]) -> Array[Int32] raise JlsError
+
+pub(all) struct Preset {
+  maximum : Int32
+  threshold1 : Int32
+  threshold2 : Int32
+  threshold3 : Int32
+  reset : Int32
+} derive(Eq, @debug.Debug)
+pub fn Preset::automatic() -> Self
+pub fn Preset::defaults(Int32, Int32) -> Self raise JlsError
+pub fn Preset::from_json(Json) -> Self raise JlsError
+pub fn Preset::resolve(Self, Int32, Int32) -> Self raise JlsError
+pub fn Preset::to_json(Self) -> Json
+
+pub(all) struct RatePoint {
+  near : Int32
+  interleave : Interleave
+  compressed_bytes : Int32
+  maximum_error : Int32
+  mean_squared_error : Double
+} derive(Eq, @debug.Debug)
+pub fn RatePoint::to_json(Self) -> Json
+
+pub(all) struct Region {
+  x : Int32
+  y : Int32
+  width : Int32
+  height : Int32
+} derive(Eq, @debug.Debug)
+pub fn Region::from_json(Json, Frame) -> Self raise JlsError
+pub fn Region::full(Frame) -> Self
+pub fn Region::intersection(Self, Self) -> Self? raise JlsError
+pub fn Region::to_json(Self) -> Json
+pub fn Region::validate(Self, Frame) -> Unit raise JlsError
+
+pub struct RowEncoder {
+  push_row : (Array[Int32]) -> Unit raise JlsError
+  finish_stream : () -> Unit raise JlsError
+  position : () -> Int32
+  written : () -> Int32
+}
+pub fn RowEncoder::bytes_written(Self) -> Int32
+pub fn RowEncoder::finish(Self) -> Unit raise JlsError
+pub fn RowEncoder::new(Frame, (Bytes) -> Unit raise JlsError, options? : EncodeOptions, limits? : Limits) -> Self raise JlsError
+pub fn RowEncoder::push(Self, Array[Int32]) -> Unit raise JlsError
+pub fn RowEncoder::rows_written(Self) -> Int32
+
+pub struct SampleHistogram {
+  bits : Int32
+  components : Int32
+  maximum_samples : Int32
+  bins : Array[Array[Int32]]
+  mut total : Int32
+}
+pub fn SampleHistogram::count(Self, Int32, Int32) -> Int32 raise JlsError
+pub fn SampleHistogram::merge(Self, Self) -> Unit raise JlsError
+pub fn SampleHistogram::new(Int32, Int32, maximum_samples? : Int32) -> Self raise JlsError
+pub fn SampleHistogram::nonzero_bins(Self, Int32, maximum_bins? : Int32) -> Array[(Int32, Int32)] raise JlsError
+pub fn SampleHistogram::push(Self, ArrayView[Int32]) -> Unit raise JlsError
+pub fn SampleHistogram::push_image(Self, Image, limits? : Limits) -> Unit raise JlsError
+pub fn SampleHistogram::quantile(Self, Int32, Double) -> Int32 raise JlsError
+pub fn SampleHistogram::reset(Self) -> Unit
+pub fn SampleHistogram::sample_count(Self) -> Int32
+pub fn SampleHistogram::subtract(Self, Self) -> Unit raise JlsError
+pub fn SampleHistogram::summary(Self, Int32) -> SampleSummary raise JlsError
+
+pub(all) enum SampleStorage {
+  U8
+  U16Big
+  U16Little
+} derive(Eq, @debug.Debug)
+pub fn SampleStorage::bytes(Self) -> Int32
+
+pub(all) struct SampleSummary {
+  samples : Int32
+  minimum : Int32
+  maximum : Int32
+  distinct : Int32
+  most_frequent : Int32
+  mean : Double
+  variance : Double
+  entropy_bits : Double
+} derive(Eq, @debug.Debug)
+pub fn SampleSummary::to_json(Self) -> Json
+
+pub(all) struct ScanInfo {
+  components : Array[Int32]
+  near : Int32
+  interleave : Interleave
+  preset : Preset
+  entropy_offset : Int32
+  entropy_end : Int32
+  restart_interval : Int32
+} derive(Eq, @debug.Debug)
+pub fn ScanInfo::to_json(Self) -> Json
+
+pub(all) struct Segment {
+  marker : Int32
+  offset : Int32
+  data : Bytes
+} derive(Eq, @debug.Debug)
+
+pub(all) struct SpiffHeader {
+  frame : Frame
+  color_space : Int32
+  resolution_units : Int32
+  vertical_resolution : UInt32
+  horizontal_resolution : UInt32
+} derive(Eq, @debug.Debug)
+pub fn SpiffHeader::default(Frame) -> Self
+pub fn SpiffHeader::to_json(Self) -> Json
+pub fn SpiffHeader::validate(Self, limits? : Limits) -> Unit raise JlsError
+
+// Type aliases
+
+// Traits

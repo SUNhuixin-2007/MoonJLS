@@ -38,7 +38,7 @@ test "limited Golomb ordinary and escape values over supported precision" {
 
 ///|
 test "malformed entropy refuses marker bits, missing unary and extra padding" {
-  for bytes in [b"\x00", b"\xff\x80"] {
+  for bytes in [b"\x00"] {
     let reader = BitsReader::new(bytes[:], 0, bytes.length())
     assert_true(
       try {
@@ -49,6 +49,15 @@ test "malformed entropy refuses marker bits, missing unary and extra padding" {
       },
     )
   }
+  let invalid_stuff = BitsReader::new(b"\xff\x80"[:], 0, 2)
+  assert_true(
+    try {
+      ignore(invalid_stuff.read_bits(16))
+      false
+    } catch {
+      _ => true
+    },
+  )
   let reader = BitsReader::new(b"\x81"[:], 0, 1)
   ignore(reader.read_bit())
   assert_true(

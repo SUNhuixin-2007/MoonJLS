@@ -19,10 +19,10 @@ pub fn Frame::sample_count(
 ) -> Int32 raise JlsError {
   check_limits(limits)
   guard self.width > 0 &&
-    self.width <= 65535 &&
+    self.width <= 2147483645 &&
     self.height > 0 &&
-    self.height <= 65535 else {
-    raise Invalid(0, "frame dimensions must be in 1..65535")
+    self.height <= 2147483647 else {
+    raise Invalid(0, "frame dimensions must be positive")
   }
   guard self.bits_per_sample >= 2 && self.bits_per_sample <= 16 else {
     raise Unsupported(0, "sample precision must be in 2..16")
@@ -106,6 +106,11 @@ pub fn Preset::resolve(
   let maximum = if self.maximum == 0 { bound } else { self.maximum }
   guard maximum >= 1 && maximum <= bound else {
     raise Invalid(0, "preset MAXVAL exceeds precision")
+  }
+  guard maximum == bound else {
+    raise Unsupported(
+      0, "this interoperable profile requires MAXVAL = 2^precision - 1",
+    )
   }
   let defaults = Preset::defaults(maximum, near)
   let threshold1 = if self.threshold1 == 0 {

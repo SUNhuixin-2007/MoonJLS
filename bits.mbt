@@ -133,6 +133,7 @@ priv struct BitWriter {
   mut used : Int32
   mut capacity : Int32
   mut closed : Bool
+  mut total : Int32
 }
 
 ///|
@@ -147,15 +148,17 @@ fn BitWriter::new(maximum : Int32) -> BitWriter raise JlsError {
     used: 0,
     capacity: 8,
     closed: false,
+    total: 0,
   }
 }
 
 ///|
 fn BitWriter::emit(self : BitWriter) -> Unit raise JlsError {
-  guard self.output.length() < self.maximum else {
+  guard self.total < self.maximum else {
     raise Limit(self.output.length(), "compressed output exceeds budget")
   }
   self.output.write_byte(self.current.to_byte())
+  self.total += 1
   self.capacity = if self.current == 255 { 7 } else { 8 }
   self.current = 0
   self.used = 0
@@ -252,6 +255,14 @@ fn BitWriter::finish(self : BitWriter) -> Bytes raise JlsError {
   }
   self.closed = true
   self.output.to_bytes()
+}
+
+///|
+/// Drains complete physical bytes while retaining partial-byte and stuffing state.
+fn BitWriter::take(self : BitWriter) -> Bytes {
+  let bytes = self.output.to_bytes()
+  self.output.reset()
+  bytes
 }
 
 ///|

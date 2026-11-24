@@ -1,0 +1,8 @@
+import {
+  "moonbitlang/core/buffer",
+  "local/moonjls" @jls,
+  "moonbitlang/core/env",
+  "moonbitlang/core/json",
+}
+
+pkgtype(kind: "executable")
