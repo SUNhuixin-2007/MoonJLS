@@ -1,0 +1,34 @@
+{
+  "verified_at": "2026-11-24T18:35:00.120433+08:00",
+  "github_account": "SUNhuixin-2007",
+  "github_id": 315030266,
+  "mooncakes_account": "SHX-ai-nb",
+  "repository": "https://github.com/SUNhuixin-2007/MoonJLS",
+  "module": "SHX-ai-nb/moonjls",
+  "version": "0.1.0",
+  "documentation": "https://mooncakes.io/docs/SHX-ai-nb/moonjls",
+  "registry_manifest": "https://mooncakes.io/api/v0/manifest/SHX-ai-nb/moonjls",
+  "publication_status": "Published; CLI 200 OK and registry manifest/documents HTTP 200",
+  "fresh_install": {
+    "command": "moon add SHX-ai-nb/moonjls@0.1.0",
+    "result": "PASS"
+  },
+  "consumer_test": {
+    "target": "js",
+    "tests": 1,
+    "passed": 1,
+    "case": "Public registry dependency roundtrips unsigned 16-bit image samples"
+  },
+  "remote_ci": {
+    "url": "https://github.com/SUNhuixin-2007/MoonJLS/actions/runs/45375471028",
+    "sha": "7fff375e3f5cb931fc3d5af03ec06d036069e7b8",
+    "conclusion": "success",
+    "test_summary_lines": [
+      "2026-11-24T10:31:12.8147150Z Total tests: 42, passed: 42, failed: 0. [wasm]",
+      "2026-11-24T10:31:13.1801918Z Total tests: 42, passed: 42, failed: 0. [wasm-gc]",
+      "2026-11-24T10:31:13.7966668Z Total tests: 42, passed: 42, failed: 0. [js]",
+      "2026-11-24T10:31:14.3741021Z Total tests: 42, passed: 42, failed: 0. [native]"
+    ]
+  },
+  "account_note": "GitHub was renamed from SHX-ai-nb; Mooncakes retains the registered namespace. Both refer to GitHub ID 315030266."
+}

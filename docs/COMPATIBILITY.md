@@ -38,4 +38,4 @@
 
 回调可能已经写出部分结果后才失败。库以错误通知；RowEncoder/Framer 失败后拒绝复用。Node 文件工具仅用 wx 独占创建输出，失败时删除本次新建文件；已有文件不会被覆盖。二进制 P5/P6 输入按行读取，PAM/ASCII 输入与文件解码会物化整图，报告中有 `full_pixel_array` 字段。
 
-JS、Wasm、Wasm-GC 的结果以本地记录为准；Windows 原生运行缺少 MSVC C++ 工具链和 SDK，未验证。远程 CI 与注册表发布状态单列于 `SUBMISSION_STATUS.md`，不与本地测试混记。
+JS、Wasm、Wasm-GC 的结果以本地记录为准；Windows 原生运行缺少 MSVC C++ 工具链和 SDK，未验证。GitHub Ubuntu 的 native 与其他三个后端已通过；远程 CI 与注册表发布状态单列于 `SUBMISSION_STATUS.md`，不与本机 Windows 测试混记。

@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-24T18:22:07.770415+08:00",
+  "recorded_at": "2026-11-24T18:32:08.476965+08:00",
   "scope": "Local validation only; remote CI, registry publication and contest status are recorded separately",
   "platform": "Windows",
   "node": "v24.22.3",
@@ -362,9 +362,9 @@
     }
   },
   "source_fingerprint": {
-    "sha256": "26ba3541cfbad664cb513ebb4820b5f02b0cc50cd46ec39d1586b3ada58b4abf",
+    "sha256": "fc439323b38459d042a48ae2db70121bdb53146ca8a55f2f8423c72c12fe3507",
     "files": {
-      ".github/workflows/check.yml": "bca84da46286791c706e313f2f66cf171ab069c2581619fccf214b9cb6d1162c",
+      ".github/workflows/check.yml": "450c47eefaeedfa96647c38ab35c050dd51f96efd1eba75061b1e3f14a7b530c",
       "bits.mbt": "6b14047ad59deb84d0de3fdd233c5e6da0e3eb4a53ee5932435f930fae6a16b3",
       "bits_wbtest.mbt": "ff0b4da30a9449c4058f46b629730e8cf43c32f8412ebaac1530d01bad559a75",
       "budgets.mbt": "4bf2347eb15182b471c4e69a577a61fa1157a9d2b15eeb93c4a3d378ef48ed7f",

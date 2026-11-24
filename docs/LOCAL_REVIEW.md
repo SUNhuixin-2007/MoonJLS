@@ -33,6 +33,6 @@
 
 ## 保留事项
 
-Windows 原生运行未验证，当前环境没有可用的 MSVC C++ 编译/链接环境；远程 CI 尚未执行。两通道交织、sample+非默认 RESET 仍只有文档列明的本地证据；非满范围 MAXVAL 显式拒绝。上述限制没有因本轮修复而变成完整标准兼容承诺。
+Windows 原生运行未验证，当前环境没有可用的 MSVC C++ 编译/链接环境；该次本地检查未包含云端运行；后续 GitHub Ubuntu 全目标 CI 已通过，见 SUBMISSION_STATUS.md。两通道交织、sample+非默认 RESET 仍只有文档列明的本地证据；非满范围 MAXVAL 显式拒绝。上述限制没有因本轮修复而变成完整标准兼容承诺。
 
 本次本地检查时使用开发命名空间；公开发布使用 `SHX-ai-nb/moonjls`，GitHub 账号为 `SUNhuixin-2007`。用户已确认 GitHub 改名，Mooncakes 保留旧名。比赛报名与审核结果不由本地测试推导，详见 `SUBMISSION_STATUS.md`。

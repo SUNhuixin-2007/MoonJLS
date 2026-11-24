@@ -1,5 +1,7 @@
 # MoonJLS
 
+[GitHub CI](https://github.com/SUNhuixin-2007/MoonJLS/actions/runs/45375471028) · [Mooncakes 0.1.0](https://mooncakes.io/docs/SHX-ai-nb/moonjls)
+
 MoonJLS 是 **纯 MoonBit JPEG-LS 无损与近无损图像编解码库**。它直接处理 2–16 位无符号样本，按 JPEG-LS 的预测、上下文统计和 Golomb 熵编码压缩图像；常见使用对象是科研灰度图、多通道原始图像和需要保留整数样本的 Wasm 工具。
 
 项目由 [SUNhuixin-2007](https://github.com/SUNhuixin-2007) 维护，源码仓库为 [MoonJLS](https://github.com/SUNhuixin-2007/MoonJLS)。本地工程保存在 `D:\CodexProjects\MoonJLS`；Mooncakes 命名空间为 `SHX-ai-nb/moonjls`。GitHub 已从 SHX-ai-nb 改名为 SUNhuixin-2007，Mooncakes 保留原用户名，二者归属于同一个 GitHub 账号。项目范围见 [兼容性清单](docs/COMPATIBILITY.md)，选题与迁移价值见 [申报书](PROPOSAL.md) 和 [生态差异](docs/DIFFERENTIATION.md)。
@@ -61,7 +63,7 @@ let options = { ..@jls.EncodeOptions::default(), near: 3 }
 let packed = @jls.encode(original, options~)
 ```
 
-在自己的 `moon.pkg` 中导入 `"SHX-ai-nb/moonjls" @jls`；发布后可用 `moon add SHX-ai-nb/moonjls@0.1.0` 安装。
+在自己的 `moon.pkg` 中导入 `"SHX-ai-nb/moonjls" @jls`；安装命令为 `moon add SHX-ai-nb/moonjls@0.1.0`。
 
 ## 独立验证
 

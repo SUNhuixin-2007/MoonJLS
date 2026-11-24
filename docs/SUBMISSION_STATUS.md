@@ -1,20 +1,26 @@
 # 发布与申报状态
 
-## 账号与归属
+2026-11-24 已完成公开推送与 Mooncakes 发布。
 
-- GitHub 当前账号：[SUNhuixin-2007](https://github.com/SUNhuixin-2007)；GitHub 数字 ID 315030266。
-- Mooncakes 账号：SHX-ai-nb，GitHub 改名后保留原注册表用户名；官方公开资料的 GitHub 头像数字 ID 与上面一致。
-- 申请人：孙卉欣。电话与私人邮箱仅用于报名联系，不写入公开工程；Git 提交使用 GitHub noreply 邮箱。
-- 项目仓库：https://github.com/SUNhuixin-2007/MoonJLS 。模块：SHX-ai-nb/moonjls，版本 0.1.0。
+## 账号与仓库
 
-## 2026-11-24 发布准备
+- GitHub：[SUNhuixin-2007/MoonJLS](https://github.com/SUNhuixin-2007/MoonJLS)，公开仓库，默认分支 main。
+- Mooncakes：[SHX-ai-nb/moonjls@0.1.0](https://mooncakes.io/docs/SHX-ai-nb/moonjls)。GitHub 改名前为 SHX-ai-nb；Mooncakes 保留旧用户名，两者公开资料对应同一 GitHub 数字 ID 315030266。
+- 申请人：孙卉欣；电话及私人邮箱未写入公开工程。Git 作者使用 SUNhuixin-2007 和 GitHub noreply 邮箱。
+- 首次公开前已修正 5 次本地提交的旧作者，源码和原始时间戳保留；原始备份只存在忽略的 work 目录。
 
-用户已授权推送与发布；本地 5 次开发提交中误用的旧作者已在公开前修正，源码与时间戳保留。原始本地记录备份在忽略目录 work，不会推送或打包。
+## 已核验结果
 
-GitHub 公开仓库已按指定账号创建，后续推送、远程 CI 和 Mooncakes 发布结果会在本页记录。注册表 dry-run 已返回 202 Accepted，明确说明预检完成且没有发布变更；当前 CLI 将该状态同时显示为错误，因此实际发布成功与否以注册表 manifest 为准。公开仓库与包发布不等于已经提交比赛报名或获得审核结果。
+- [GitHub Actions](https://github.com/SUNhuixin-2007/MoonJLS/actions/runs/45375471028) 已通过：格式、全目标严格检查、Wasm/Wasm-GC/JS/native 各 42 项测试、282 组双向互操作、80 组扩展独立解码、10 类真实文件场景及接口一致性。
+- CI 使用已验证的编译器及标准库 0.10.17+093cb8f9c，避免 latest 更新造成格式规则漂移。首轮最新版本的格式检查失败已保留在运行记录中，修正固定版本后完整重跑通过。
+- Mooncakes publish 返回 200 OK；注册表 manifest 和公开文档 HTTP 200，版本 0.1.0，仓库链接归属于 SUNhuixin-2007。
+- 在新目录从公开注册表下载安装 0.1.0，再运行消费方 16 位样本往返测试，通过；不是复用本地工程依赖。
+- 机器可读证据：REMOTE_CI.json、RELEASE_VERIFICATION.json；Windows 本地检查另见 LOCAL_VALIDATION.json。
 
-## 开发与申报边界
+Git 传输在本机多次连接重置后，改用 GitHub 官方 Git Database API 上传并逐对象核对 SHA；完整开发历史和本地/远端提交对应一致。未上传历史备份、缓存或登录凭据。
 
-2026-11-23 至 24 完成独立工程、算法移植、三目标测试、独立互操作和本地问题修复。来源、许可和 AI 辅助见 THIRD_PARTY.md；生态差异比较已有公开项目的职责，不保证未公开申报没有相邻内容。
+## 比赛申报边界
 
-比赛时间和表单要求以最新官方通知为准，不将旧八月活动说明直接套用到本次赛季。联系方式只在用户确认的正式报名渠道使用，本轮不自动提交报名表。
+公开仓库和包发布不等于已提交比赛报名或通过审核。本轮未自动提交含联系方式的报名表。申报书已填写申请人、真实仓库链接与发布命名空间；用户可按最新官方渠道提交。
+
+CharLS 来源、许可与 AI 辅助见 THIRD_PARTY.md；生态差异材料比较已有公开项目职责，不能保证未公开申报没有相邻内容。Windows 本机原生运行仍未验证；云端 Ubuntu 原生测试已通过，二者分开记录。
