@@ -1,0 +1,2 @@
+# Independent codec oracle only; not a MoonBit runtime dependency.
+imagecodecs==2026.11.11

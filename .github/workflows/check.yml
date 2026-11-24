@@ -1,0 +1,31 @@
+name: check
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  moonbit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hustcer/setup-moonbit@v1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: moon fmt --check
+      - run: moon check --target all --deny-warn
+      - run: moon test --target all --deny-warn
+      - run: moon run cmd/demo --target js --deny-warn
+      - run: python scripts/count_loc.py --minimum 4000
+      - run: python -m pip install --target work/pydeps -r scripts/requirements-dev.txt
+      - run: python scripts/interop.py
+      - run: python scripts/test_file_cli.py
+      - name: Generated interface drift
+        run: |
+          moon info
+          git diff --exit-code -- '*.mbti'

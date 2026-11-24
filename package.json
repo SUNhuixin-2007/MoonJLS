@@ -1,0 +1,11 @@
+{
+  "name": "moonjls-local-tools",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "validate": "python scripts/validate.py"
+  }
+}
