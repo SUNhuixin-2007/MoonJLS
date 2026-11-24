@@ -1,0 +1,405 @@
+{
+  "recorded_at": "2026-11-24T08:37:59.621285+08:00",
+  "scope": "Local validation only; no remote repository, contest submission or Mooncakes publication",
+  "platform": "Windows",
+  "node": "v24.22.3",
+  "toolchain": "moon 0.1.20261021 (a4f8933 2026-10-21) ~\\.moon\\bin\\moon.exe\nmoonc v0.10.17+093cb8f9c (2026-10-21) \\\\?\\C:\\Users\\11619\\.moon\\bin\\moonc.exe\nmoonrun 0.1.20261021 (a4f8933 2026-10-21) \\\\?\\C:\\Users\\11619\\.moon\\bin\\moonrun.exe\n\nFeature flags enabled: rr_moon_mod,rr_moon_pkg",
+  "checks": [
+    {
+      "name": "format",
+      "command": [
+        "moon",
+        "fmt",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "compile_all",
+      "command": [
+        "moon",
+        "check",
+        "--target",
+        "all",
+        "--deny-warn"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "test_wasm",
+      "command": [
+        "moon",
+        "test",
+        "--target",
+        "wasm",
+        "--deny-warn"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "tests": {
+        "total": 31,
+        "passed": 31,
+        "failed": 0
+      }
+    },
+    {
+      "name": "test_wasm_gc",
+      "command": [
+        "moon",
+        "test",
+        "--target",
+        "wasm-gc",
+        "--deny-warn"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "tests": {
+        "total": 31,
+        "passed": 31,
+        "failed": 0
+      }
+    },
+    {
+      "name": "test_js",
+      "command": [
+        "moon",
+        "test",
+        "--target",
+        "js",
+        "--deny-warn"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "tests": {
+        "total": 31,
+        "passed": 31,
+        "failed": 0
+      }
+    },
+    {
+      "name": "demo",
+      "command": [
+        "moon",
+        "run",
+        "cmd/demo",
+        "--target",
+        "js",
+        "--deny-warn"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "interfaces",
+      "command": [
+        "moon",
+        "info"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "source_scale",
+      "command": [
+        "C:\\Users\\11619\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+        "scripts/count_loc.py",
+        "--minimum",
+        "4000"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "independent_interop",
+      "command": [
+        "C:\\Users\\11619\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+        "scripts/interop.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "file_cli",
+      "command": [
+        "C:\\Users\\11619\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+        "scripts/test_file_cli.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "test_native",
+      "status": "NOT_RUN",
+      "reason": "Windows MSVC C++ compiler/linker and SDK are unavailable in this environment"
+    }
+  ],
+  "source_scale": {
+    "method": "Handwritten .mbt only, comments/blank removed; strict also removes punctuation-only lines",
+    "excluded": [
+      ".git",
+      ".mooncakes",
+      "_build",
+      "node_modules",
+      "target",
+      "work"
+    ],
+    "totals": {
+      "core": {
+        "physical": 5675,
+        "code_nonblank": 5060,
+        "effective_strict": 4026
+      },
+      "tests": {
+        "physical": 1102,
+        "code_nonblank": 1036,
+        "effective_strict": 807
+      },
+      "examples_and_tools": {
+        "physical": 404,
+        "code_nonblank": 371,
+        "effective_strict": 287
+      }
+    },
+    "files": {
+      "core": [
+        {
+          "path": "bits.mbt",
+          "physical": 305,
+          "code_nonblank": 263,
+          "effective_strict": 205
+        },
+        {
+          "path": "color_transform.mbt",
+          "physical": 184,
+          "code_nonblank": 164,
+          "effective_strict": 130
+        },
+        {
+          "path": "context.mbt",
+          "physical": 290,
+          "code_nonblank": 241,
+          "effective_strict": 190
+        },
+        {
+          "path": "dimensions.mbt",
+          "physical": 50,
+          "code_nonblank": 45,
+          "effective_strict": 39
+        },
+        {
+          "path": "framer.mbt",
+          "physical": 217,
+          "code_nonblank": 191,
+          "effective_strict": 150
+        },
+        {
+          "path": "histogram.mbt",
+          "physical": 295,
+          "code_nonblank": 259,
+          "effective_strict": 205
+        },
+        {
+          "path": "image_json.mbt",
+          "physical": 279,
+          "code_nonblank": 241,
+          "effective_strict": 176
+        },
+        {
+          "path": "image_ops.mbt",
+          "physical": 522,
+          "code_nonblank": 466,
+          "effective_strict": 380
+        },
+        {
+          "path": "info_json.mbt",
+          "physical": 68,
+          "code_nonblank": 61,
+          "effective_strict": 43
+        },
+        {
+          "path": "markers.mbt",
+          "physical": 505,
+          "code_nonblank": 469,
+          "effective_strict": 372
+        },
+        {
+          "path": "metadata.mbt",
+          "physical": 298,
+          "code_nonblank": 261,
+          "effective_strict": 214
+        },
+        {
+          "path": "pam.mbt",
+          "physical": 304,
+          "code_nonblank": 280,
+          "effective_strict": 220
+        },
+        {
+          "path": "parameters.mbt",
+          "physical": 162,
+          "code_nonblank": 144,
+          "effective_strict": 113
+        },
+        {
+          "path": "pnm.mbt",
+          "physical": 247,
+          "code_nonblank": 222,
+          "effective_strict": 174
+        },
+        {
+          "path": "pnm_source.mbt",
+          "physical": 378,
+          "code_nonblank": 333,
+          "effective_strict": 257
+        },
+        {
+          "path": "rate_control.mbt",
+          "physical": 161,
+          "code_nonblank": 143,
+          "effective_strict": 112
+        },
+        {
+          "path": "region.mbt",
+          "physical": 178,
+          "code_nonblank": 159,
+          "effective_strict": 126
+        },
+        {
+          "path": "restart.mbt",
+          "physical": 179,
+          "code_nonblank": 165,
+          "effective_strict": 134
+        },
+        {
+          "path": "row_encoder.mbt",
+          "physical": 198,
+          "code_nonblank": 174,
+          "effective_strict": 139
+        },
+        {
+          "path": "rows.mbt",
+          "physical": 103,
+          "code_nonblank": 93,
+          "effective_strict": 74
+        },
+        {
+          "path": "scan.mbt",
+          "physical": 639,
+          "code_nonblank": 603,
+          "effective_strict": 498
+        },
+        {
+          "path": "types.mbt",
+          "physical": 113,
+          "code_nonblank": 83,
+          "effective_strict": 75
+        }
+      ],
+      "tests": [
+        {
+          "path": "bits_wbtest.mbt",
+          "physical": 81,
+          "code_nonblank": 76,
+          "effective_strict": 60
+        },
+        {
+          "path": "image_wbtest.mbt",
+          "physical": 332,
+          "code_nonblank": 317,
+          "effective_strict": 235
+        },
+        {
+          "path": "integration_wbtest.mbt",
+          "physical": 484,
+          "code_nonblank": 447,
+          "effective_strict": 354
+        },
+        {
+          "path": "scan_wbtest.mbt",
+          "physical": 205,
+          "code_nonblank": 196,
+          "effective_strict": 158
+        }
+      ],
+      "examples_and_tools": [
+        {
+          "path": "cmd/demo/main.mbt",
+          "physical": 31,
+          "code_nonblank": 30,
+          "effective_strict": 22
+        },
+        {
+          "path": "cmd/interop/main.mbt",
+          "physical": 175,
+          "code_nonblank": 160,
+          "effective_strict": 118
+        },
+        {
+          "path": "cmd/node/main.mbt",
+          "physical": 198,
+          "code_nonblank": 181,
+          "effective_strict": 147
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Native execution is not validated on this Windows host without MSVC C++ compiler and SDK",
+    "Interleaved two-component scans have local tests only; CharLS reference rejects them",
+    "Sample interleave with non-default RESET has local tests only; external sample cases use RESET=64",
+    "MAXVAL must equal 2^bits_per_sample - 1; other values fail explicitly",
+    "Restart/custom-threshold/push encoder cases use independent CharLS decoding; the wrapper cannot generate those exact combinations",
+    "Synthetic vectors are not a complete conformance certification or a real clinical/production corpus",
+    "Remote CI configuration has not been executed on a hosting service"
+  ],
+  "interop": {
+    "oracle": "imagecodecs==2026.11.11",
+    "engine": "charls 2.4.5",
+    "cases": 282,
+    "outgoing_extensions": 80,
+    "directions": [
+      "CharLS -> MoonJLS",
+      "MoonJLS -> CharLS"
+    ],
+    "checks": [
+      "exact reconstructed pixels",
+      "maximum absolute error <= NEAR",
+      "2/4/8/10/12/16-bit",
+      "one/two/three/four channels",
+      "all interleave modes",
+      "runs/noise/gradients",
+      "row boundaries",
+      "HP1/2/3 extension",
+      "SPIFF",
+      "LSE4 extended dimensions",
+      "restart intervals (outgoing)",
+      "push encoder (outgoing)",
+      "explicit full-range MAXVAL/custom T1/T2/T3/RESET (outgoing)"
+    ],
+    "reference_limits": [
+      "imagecodecs encoding rejects two-channel input shapes",
+      "CharLS decoding rejects interleaved two-channel scans",
+      "sample interleave plus non-default RESET has local tests only; external sample tests use RESET=64",
+      "non-full-range MAXVAL is explicitly unsupported by MoonJLS public codec profile"
+    ],
+    "result": "PASS"
+  },
+  "file_cli": {
+    "result": "PASS",
+    "cases": [
+      "8位 1通道 n0 none",
+      "16位 3通道 n0 line",
+      "12位 3通道 n3 sample",
+      "8位 4通道 n1 sample",
+      "8位 2通道 n0 none",
+      "8位 3通道 n0 none",
+      "ASCII input and explicit PAM export",
+      "truncated/invalid inputs, unsupported MAXVAL, option rejection and partial-output cleanup"
+    ],
+    "independent": "charls 2.4.5",
+    "scope": "Real temporary files, Unicode paths, compiled MoonBit codec; Node performs I/O only"
+  },
+  "result": "PASS_WITH_LIMITATIONS"
+}
