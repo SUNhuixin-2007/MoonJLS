@@ -14,6 +14,7 @@ priv struct RowEncodingState {
   mut bytes : Int32
   mut closed : Bool
   mut failed : Bool
+  mut busy : Bool
 }
 
 ///|
@@ -35,8 +36,15 @@ fn RowEncodingState::push(
   self : RowEncodingState,
   row : Array[Int32],
 ) -> Unit raise JlsError {
-  guard !self.closed && !self.failed else {
-    raise Invalid(self.rows, "row encoder is closed or failed")
+  guard !self.closed && !self.failed && !self.busy else {
+    raise Invalid(
+      self.rows,
+      "row encoder is closed, failed or inside a callback",
+    )
+  }
+  self.busy = true
+  defer {
+    self.busy = false
   }
   errdefer {
     self.failed = true
@@ -89,8 +97,15 @@ fn RowEncodingState::push(
 
 ///|
 fn RowEncodingState::finish(self : RowEncodingState) -> Unit raise JlsError {
-  guard !self.closed && !self.failed else {
-    raise Invalid(self.rows, "row encoder is closed or failed")
+  guard !self.closed && !self.failed && !self.busy else {
+    raise Invalid(
+      self.rows,
+      "row encoder is closed, failed or inside a callback",
+    )
+  }
+  self.busy = true
+  defer {
+    self.busy = false
   }
   errdefer {
     self.failed = true
@@ -117,6 +132,8 @@ pub struct RowEncoder {
 /// For canonical row order, grayscale uses NONE and multiple components use
 /// LINE/SAMPLE. Planar multi-scan encoding requires encode_rows with row revisits.
 /// The sink receives a header immediately; commit the sink only after finish.
+/// A sink may inspect counters but must not reenter push or finish on this encoder.
+/// Reentry is rejected before mutation; an uncaught sink error poisons the stream.
 pub fn RowEncoder::new(
   frame : Frame,
   emit : (Bytes) -> Unit raise JlsError,
@@ -165,6 +182,7 @@ pub fn RowEncoder::new(
     bytes: 0,
     closed: false,
     failed: false,
+    busy: false,
   }
   state.write(header.to_bytes())
   {
