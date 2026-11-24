@@ -1,6 +1,6 @@
 # MoonJLS
 
-[GitHub CI](https://github.com/SUNhuixin-2007/MoonJLS/actions/runs/45377577636) · [Mooncakes](https://mooncakes.io/docs/SHX-ai-nb/moonjls)
+[GitHub CI](https://github.com/SUNhuixin-2007/MoonJLS/actions/runs/45378238917) · [Mooncakes](https://mooncakes.io/docs/SHX-ai-nb/moonjls)
 
 MoonJLS 是 **纯 MoonBit JPEG-LS 无损与近无损图像编解码库**。它直接处理 2–16 位无符号样本，按 JPEG-LS 的预测、上下文统计和 Golomb 熵编码压缩图像；常见使用对象是科研灰度图、多通道原始图像和需要保留整数样本的 Wasm 工具。
 

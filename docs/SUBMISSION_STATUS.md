@@ -5,16 +5,16 @@
 ## 账号与仓库
 
 - GitHub：[SUNhuixin-2007/MoonJLS](https://github.com/SUNhuixin-2007/MoonJLS)，公开仓库，默认分支 main。
-- Mooncakes：[SHX-ai-nb/moonjls@0.1.0](https://mooncakes.io/docs/SHX-ai-nb/moonjls)。GitHub 改名前为 SHX-ai-nb；Mooncakes 保留旧用户名，两者公开资料对应同一 GitHub 数字 ID 315030266。
+- Mooncakes：[SHX-ai-nb/moonjls@0.1.1](https://mooncakes.io/docs/SHX-ai-nb/moonjls)。GitHub 改名前为 SHX-ai-nb；Mooncakes 保留旧用户名，两者公开资料对应同一 GitHub 数字 ID 315030266。
 - 申请人：孙卉欣；电话及私人邮箱未写入公开工程。Git 作者使用 SUNhuixin-2007 和 GitHub noreply 邮箱。
 - 首次公开前已修正 5 次本地提交的旧作者，源码和原始时间戳保留；原始备份只存在忽略的 work 目录。
 
 ## 已核验结果
 
-- [GitHub Actions](https://github.com/SUNhuixin-2007/MoonJLS/actions/runs/45375471028) 已通过：格式、全目标严格检查、Wasm/Wasm-GC/JS/native 各 42 项测试、282 组双向互操作、80 组扩展独立解码、10 类真实文件场景及接口一致性。
+- [GitHub Actions](https://github.com/SUNhuixin-2007/MoonJLS/actions/runs/45378238917) 已通过：格式、全目标严格检查、Wasm/Wasm-GC/JS/native 各 46 项测试、282 组双向互操作、80 组扩展独立解码、10 类真实文件场景及接口一致性。
 - CI 使用已验证的编译器及标准库 0.10.17+093cb8f9c，避免 latest 更新造成格式规则漂移。首轮最新版本的格式检查失败已保留在运行记录中，修正固定版本后完整重跑通过。
-- Mooncakes publish 返回 200 OK；注册表 manifest 和公开文档 HTTP 200，版本 0.1.0，仓库链接归属于 SUNhuixin-2007。
-- 在新目录从公开注册表下载安装 0.1.0，再运行消费方 16 位样本往返测试，通过；不是复用本地工程依赖。
+- Mooncakes publish 返回 200 OK；注册表 manifest 和公开文档 HTTP 200，版本 0.1.1，仓库链接归属于 SUNhuixin-2007。
+- 在新目录从公开注册表下载安装 0.1.1，再运行消费方 16 位样本往返测试，通过；不是复用本地工程依赖。
 - 机器可读证据：REMOTE_CI.json、RELEASE_VERIFICATION.json；Windows 本地检查另见 LOCAL_VALIDATION.json。
 
 Git 传输在本机多次连接重置后，改用 GitHub 官方 Git Database API 上传并逐对象核对 SHA；完整开发历史和本地/远端提交对应一致。未上传历史备份、缓存或登录凭据。
@@ -25,4 +25,6 @@ Git 传输在本机多次连接重置后，改用 GitHub 官方 Git Database API
 
 CharLS 来源、许可与 AI 辅助见 THIRD_PARTY.md；生态差异材料比较已有公开项目职责，不能保证未公开申报没有相邻内容。Windows 本机原生运行仍未验证；云端 Ubuntu 原生测试已通过，二者分开记录。
 
-申报书已按最新八项要求重写；公开前十次提交均有非空、非重复且已列明的工程贡献，详见 COMMIT_AUDIT.md。新增 SPIFF 位置与回调重入保护已通过 GitHub 四后端各 46 项测试（运行 45377577636）；0.1.1 补丁版准备发布，0.1.0 保留为原始已发布版本。
+申报书已按最新八项要求重写；公开前十次提交均有非空、非重复且已列明的工程贡献，详见 COMMIT_AUDIT.md。新增 SPIFF 位置与回调重入保护已通过 GitHub 四后端各 46 项测试（运行 45377577636）；0.1.1 补丁版已发布并通过注册表下载安装验证，0.1.0 保留为原始已发布版本。
+
+八项申报书与逐条提交证据已公开；最低数量核查固定审阅前十次实质变更，不将申报书及本次发布记录更新计入该十次门槛。
