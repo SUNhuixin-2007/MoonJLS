@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-24T18:32:08.476965+08:00",
+  "recorded_at": "2026-11-24T18:47:18.004157+08:00",
   "scope": "Local validation only; remote CI, registry publication and contest status are recorded separately",
   "platform": "Windows",
   "node": "v24.22.3",
@@ -39,8 +39,8 @@
       "exit_code": 0,
       "status": "PASS",
       "tests": {
-        "total": 42,
-        "passed": 42,
+        "total": 46,
+        "passed": 46,
         "failed": 0
       }
     },
@@ -56,8 +56,8 @@
       "exit_code": 0,
       "status": "PASS",
       "tests": {
-        "total": 42,
-        "passed": 42,
+        "total": 46,
+        "passed": 46,
         "failed": 0
       }
     },
@@ -73,8 +73,8 @@
       "exit_code": 0,
       "status": "PASS",
       "tests": {
-        "total": 42,
-        "passed": 42,
+        "total": 46,
+        "passed": 46,
         "failed": 0
       }
     },
@@ -151,14 +151,14 @@
     ],
     "totals": {
       "core": {
-        "physical": 5771,
-        "code_nonblank": 5153,
-        "effective_strict": 4100
+        "physical": 5798,
+        "code_nonblank": 5178,
+        "effective_strict": 4118
       },
       "tests": {
-        "physical": 1402,
-        "code_nonblank": 1314,
-        "effective_strict": 1009
+        "physical": 1510,
+        "code_nonblank": 1416,
+        "effective_strict": 1093
       },
       "examples_and_tools": {
         "physical": 404,
@@ -236,9 +236,9 @@
         },
         {
           "path": "metadata.mbt",
-          "physical": 298,
-          "code_nonblank": 261,
-          "effective_strict": 214
+          "physical": 307,
+          "code_nonblank": 270,
+          "effective_strict": 220
         },
         {
           "path": "pam.mbt",
@@ -284,9 +284,9 @@
         },
         {
           "path": "row_encoder.mbt",
-          "physical": 199,
-          "code_nonblank": 175,
-          "effective_strict": 140
+          "physical": 217,
+          "code_nonblank": 191,
+          "effective_strict": 152
         },
         {
           "path": "rows.mbt",
@@ -333,6 +333,18 @@
           "effective_strict": 354
         },
         {
+          "path": "metadata_bounds_wbtest.mbt",
+          "physical": 43,
+          "code_nonblank": 40,
+          "effective_strict": 35
+        },
+        {
+          "path": "row_reentry_wbtest.mbt",
+          "physical": 65,
+          "code_nonblank": 62,
+          "effective_strict": 49
+        },
+        {
           "path": "scan_wbtest.mbt",
           "physical": 205,
           "code_nonblank": 196,
@@ -362,7 +374,7 @@
     }
   },
   "source_fingerprint": {
-    "sha256": "fc439323b38459d042a48ae2db70121bdb53146ca8a55f2f8423c72c12fe3507",
+    "sha256": "4e58cb0ce08537d0071df88f8926f153e94036c87412d509ade63384c862fcd5",
     "files": {
       ".github/workflows/check.yml": "450c47eefaeedfa96647c38ab35c050dd51f96efd1eba75061b1e3f14a7b530c",
       "bits.mbt": "6b14047ad59deb84d0de3fdd233c5e6da0e3eb4a53ee5932435f930fae6a16b3",
@@ -389,8 +401,9 @@
       "info_json.mbt": "66013ff2eec2b322695a6da9d21a33f8fea17ecdf8c6884d30c204869b0723b2",
       "integration_wbtest.mbt": "f6a8c23c749a326e0b0f8dd1577c3e907d0cfc019fef8a5c10fbd0afa8969ff3",
       "markers.mbt": "6c01109d880eee590dc33ad258fea00fec77d3f55171ede0a2e89d4283b57200",
-      "metadata.mbt": "9c220165e5dbdfa8e76a900c6808b665197c2071ffa763a1c85db51a587f898f",
-      "moon.mod": "a7bbf496a82d6bca0960c2688ae0f5802c58d521de73a2a639183a11885d7ccb",
+      "metadata.mbt": "cf9d2b5f891036c692168b7ce8ab2d1cb7b7024a9afda75be18aa7700106e80b",
+      "metadata_bounds_wbtest.mbt": "af9d42e9931a1df1c7539306f82f3804d7ffec99a4edd99dd0a43e4284c352ff",
+      "moon.mod": "44eff9fa8c7c74da993845acda77c1d59df18ab2221b7f9bfdb33f0a298b85cf",
       "moon.pkg": "0c821463a2c851988325605fcb25d1601ab896502ce1f646dd4cb2664393d14a",
       "package.json": "bc893019cfc417ddb8797f03f4cb7b8c0478035a4daa094feb92dcef586fc497",
       "pam.mbt": "cbbf916277a763ea214a644e8266ac212aebec47d866732a3956c40ece01ebbe",
@@ -400,7 +413,8 @@
       "rate_control.mbt": "dcd2e1a65bd6b2074a6bb4bad789195a3f4f4ee59417a51bc880bdd928b19b56",
       "region.mbt": "72840afad51ce2ad5a73a6ab8d9e12bced00529889ab92bbe29a98f90b436799",
       "restart.mbt": "599aebffdec1c82be0e807701faa92e576f6dbd87d06d7a2a024c0748432ef69",
-      "row_encoder.mbt": "d9ced0489e3ed5ec0732c0e3a47f7e9eb67265ff8f0e8379af2da009623f22e4",
+      "row_encoder.mbt": "ec2a68166e02e5e5d1eb9163742c163d59cb285d82910dd7484a3752ded171a7",
+      "row_reentry_wbtest.mbt": "05d3cc1ac2555f9927f383c305a815844ef87bec6fde82efd804039e2e84ec33",
       "rows.mbt": "29cbe19512149fef42d975060509b7acfa97b7b6fa0b73cdbf4a83cbef8744df",
       "scan.mbt": "7e27ada0c34d92c597f15ac2e68b7b519f7683f5033f3ec381f525b397314390",
       "scan_wbtest.mbt": "a346cfd8b240ebd1b64c475b4bad2cc25be9d77e1aa8b288517eaf2727639838",

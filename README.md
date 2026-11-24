@@ -1,6 +1,6 @@
 # MoonJLS
 
-[GitHub CI](https://github.com/SUNhuixin-2007/MoonJLS/actions/runs/45375471028) · [Mooncakes 0.1.0](https://mooncakes.io/docs/SHX-ai-nb/moonjls)
+[GitHub CI](https://github.com/SUNhuixin-2007/MoonJLS/actions/runs/45377577636) · [Mooncakes](https://mooncakes.io/docs/SHX-ai-nb/moonjls)
 
 MoonJLS 是 **纯 MoonBit JPEG-LS 无损与近无损图像编解码库**。它直接处理 2–16 位无符号样本，按 JPEG-LS 的预测、上下文统计和 Golomb 熵编码压缩图像；常见使用对象是科研灰度图、多通道原始图像和需要保留整数样本的 Wasm 工具。
 
@@ -63,7 +63,7 @@ let options = { ..@jls.EncodeOptions::default(), near: 3 }
 let packed = @jls.encode(original, options~)
 ```
 
-在自己的 `moon.pkg` 中导入 `"SHX-ai-nb/moonjls" @jls`；安装命令为 `moon add SHX-ai-nb/moonjls@0.1.0`。
+在自己的 `moon.pkg` 中导入 `"SHX-ai-nb/moonjls" @jls`；安装命令为 `moon add SHX-ai-nb/moonjls@0.1.1`。
 
 ## 独立验证
 
@@ -80,7 +80,7 @@ python scripts/interop.py
 python scripts/validate.py
 ```
 
-记录包含三个运行目标各 42 项测试、独立编解码验证与真实文件测试；Windows native 未执行，远程 CI 与发布进度见 [发布状态](docs/SUBMISSION_STATUS.md)。
+记录包含三个运行目标各 46 项测试、独立编解码验证与真实文件测试；Windows native 未执行，远程 CI 与发布进度见 [发布状态](docs/SUBMISSION_STATUS.md)。
 
 ## 源码规模
 
@@ -89,7 +89,7 @@ python scripts/count_loc.py
 python scripts/count_loc.py --minimum 4000
 ```
 
-统计将核心、测试、示例工具分开，排除依赖、构建、生成接口、注释和空行；严格口径进一步排除纯结构符号。当前严格有效核心为 **4,100 行**，非空非注释核心为 5,153 行。精确口径与逐文件统计保存在 [本地验证记录](docs/LOCAL_VALIDATION.json)，不承诺主办方采用相同计数方式。
+统计将核心、测试、示例工具分开，排除依赖、构建、生成接口、注释和空行；严格口径进一步排除纯结构符号。当前严格有效核心为 **4,118 行**，非空非注释核心为 5,178 行。精确口径与逐文件统计保存在 [本地验证记录](docs/LOCAL_VALIDATION.json)，不承诺主办方采用相同计数方式。
 
 ## 资料与授权
 
