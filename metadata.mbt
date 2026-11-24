@@ -142,6 +142,15 @@ pub fn Info::spiff_header(
     guard end_at > header_at else {
       raise Invalid(header_at, "SPIFF end-of-directory missing or misplaced")
     }
+    let mut first_entropy = self.consumed
+    for scan in self.scans {
+      first_entropy = first_entropy.min(scan.entropy_offset)
+    }
+    guard !self.scans.is_empty() && end_at < first_entropy else {
+      raise Invalid(
+        end_at, "SPIFF wrapper must end before the first image scan",
+      )
+    }
   }
   found
 }
