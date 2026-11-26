@@ -1,37 +1,63 @@
 {
-  "verified_at": "2026-11-24T18:51:48.465695+08:00",
+  "verified_at": "2026-11-26T18:29:42.751145+08:00",
   "github_account": "SUNhuixin-2007",
   "github_id": 315030266,
   "mooncakes_account": "SHX-ai-nb",
   "repository": "https://github.com/SUNhuixin-2007/MoonJLS",
   "module": "SHX-ai-nb/moonjls",
-  "version": "0.1.1",
+  "version": "0.2.0",
+  "previous_version": "0.1.1",
   "documentation": "https://mooncakes.io/docs/SHX-ai-nb/moonjls",
   "registry_manifest": "https://mooncakes.io/api/v0/manifest/SHX-ai-nb/moonjls",
-  "publication_status": "Published; CLI 200 OK and registry manifest/documents HTTP 200",
+  "publication_status": "Published; CLI 200 OK, registry contains 0.2.0, documentation HTTP 200",
   "fresh_install": {
-    "command": "moon add --upgrade SHX-ai-nb/moonjls@0.1.1",
-    "result": "PASS"
+    "commands": [
+      "moon update",
+      "moon add --upgrade SHX-ai-nb/moonjls@0.2.0"
+    ],
+    "result": "PASS",
+    "dependency_manifest_version": "0.2.0"
   },
   "consumer_test": {
     "target": "js",
-    "tests": 1,
-    "passed": 1,
-    "case": "Public registry dependency roundtrips unsigned 16-bit image samples"
-  },
-  "remote_ci": {
-    "url": "https://github.com/SUNhuixin-2007/MoonJLS/actions/runs/45378238917",
-    "headSha": "91cc7652af88d217940096c327f0764d303b8b7a",
-    "conclusion": "success",
-    "test_summary_lines": [
-      "2026-11-24T10:49:00.7886451Z Total tests: 46, passed: 46, failed: 0. [wasm]",
-      "2026-11-24T10:49:01.0561144Z Total tests: 46, passed: 46, failed: 0. [wasm-gc]",
-      "2026-11-24T10:49:01.5295950Z Total tests: 46, passed: 46, failed: 0. [js]",
-      "2026-11-24T10:49:01.9167431Z Total tests: 46, passed: 46, failed: 0. [native]"
+    "tests": 3,
+    "passed": 3,
+    "cases": [
+      "unsigned 16-bit samples",
+      "explicit MAXVAL=1000 lossless",
+      "P=16 MAXVAL=1000 NEAR=3"
     ]
   },
-  "account_note": "GitHub was renamed from SHX-ai-nb; Mooncakes retains the registered namespace. Both refer to GitHub ID 315030266.",
-  "previous_version": "0.1.0",
+  "remote_ci": {
+    "url": "https://github.com/SUNhuixin-2007/MoonJLS/actions/runs/45801454784",
+    "headSha": "85830daab25208d9c55664a5a8b02d4b7e335012",
+    "conclusion": "success",
+    "test_summary_lines": [
+      "moonbit\tRun moon test --target all --deny-warn\t2026-11-26T10:27:39.9840639Z Total tests: 50, passed: 50, failed: 0. [wasm]",
+      "moonbit\tRun moon test --target all --deny-warn\t2026-11-26T10:27:40.3695779Z Total tests: 50, passed: 50, failed: 0. [wasm-gc]",
+      "moonbit\tRun moon test --target all --deny-warn\t2026-11-26T10:27:41.0036116Z Total tests: 50, passed: 50, failed: 0. [js]",
+      "moonbit\tRun moon test --target all --deny-warn\t2026-11-26T10:27:41.6256632Z Total tests: 50, passed: 50, failed: 0. [native]",
+      "moonbit\tOfficial reference golden inputs (live Windows decoder is separate)\t2026-11-26T10:28:35.7661757Z PASS_GOLDEN_INPUT_ONLY: 144 independent incoming vectors; live outgoing reference unavailable (not claimed)",
+      "moonbit\tRun python scripts/test_file_cli.py\t2026-11-26T10:28:39.2448960Z PASS: 14 real-file scenarios including overwrite protection and failed-output cleanup"
+    ]
+  },
+  "maxval_live": {
+    "cases": 144,
+    "non_full_range_cases": 90,
+    "full_range_controls": 54,
+    "incoming_pass": 144,
+    "outgoing_live_pass": 144,
+    "evidence": "docs/T87_MAXVAL_VALIDATION.json"
+  },
+  "annex_e": {
+    "result": "PARTIAL",
+    "direction": "decode-only",
+    "passed": 10,
+    "known_gaps": 2,
+    "encoder_conformance": "NOT_RUN",
+    "evidence": "docs/T87_ANNEX_E_VALIDATION.json"
+  },
+  "account_note": "GitHub renamed from SHX-ai-nb; Mooncakes retains the namespace. Both refer to GitHub ID 315030266.",
   "commit_audit": {
     "audited_baseline": 10,
     "empty": 0,

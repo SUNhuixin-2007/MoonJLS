@@ -1,179 +1,188 @@
 {
   "conclusion": "success",
-  "createdAt": "2026-11-24T10:48:20Z",
-  "headSha": "91cc7652af88d217940096c327f0764d303b8b7a",
+  "createdAt": "2026-11-26T10:27:08Z",
+  "headSha": "85830daab25208d9c55664a5a8b02d4b7e335012",
   "jobs": [
     {
-      "completedAt": "2026-11-24T10:49:51Z",
+      "completedAt": "2026-11-26T10:28:42Z",
       "conclusion": "success",
-      "databaseId": 138390125042,
+      "databaseId": 139845429630,
       "name": "moonbit",
-      "startedAt": "2026-11-24T10:48:23Z",
+      "startedAt": "2026-11-26T10:27:11Z",
       "status": "completed",
       "steps": [
         {
-          "completedAt": "2026-11-24T10:48:26Z",
+          "completedAt": "2026-11-26T10:27:13Z",
           "conclusion": "success",
           "name": "Set up job",
           "number": 1,
-          "startedAt": "2026-11-24T10:48:23Z",
+          "startedAt": "2026-11-26T10:27:12Z",
           "status": "completed"
         },
         {
-          "completedAt": "2026-11-24T10:48:30Z",
+          "completedAt": "2026-11-26T10:27:14Z",
           "conclusion": "success",
           "name": "Run actions/checkout@v4",
           "number": 2,
-          "startedAt": "2026-11-24T10:48:26Z",
+          "startedAt": "2026-11-26T10:27:13Z",
           "status": "completed"
         },
         {
-          "completedAt": "2026-11-24T10:48:37Z",
+          "completedAt": "2026-11-26T10:27:25Z",
           "conclusion": "success",
           "name": "Run hustcer/setup-moonbit@v1",
           "number": 3,
-          "startedAt": "2026-11-24T10:48:30Z",
+          "startedAt": "2026-11-26T10:27:14Z",
           "status": "completed"
         },
         {
-          "completedAt": "2026-11-24T10:48:37Z",
+          "completedAt": "2026-11-26T10:27:25Z",
           "conclusion": "success",
           "name": "Run moon version --all",
           "number": 4,
-          "startedAt": "2026-11-24T10:48:37Z",
+          "startedAt": "2026-11-26T10:27:25Z",
           "status": "completed"
         },
         {
-          "completedAt": "2026-11-24T10:48:41Z",
+          "completedAt": "2026-11-26T10:27:28Z",
           "conclusion": "success",
           "name": "Run actions/setup-node@v4",
           "number": 5,
-          "startedAt": "2026-11-24T10:48:37Z",
+          "startedAt": "2026-11-26T10:27:25Z",
           "status": "completed"
         },
         {
-          "completedAt": "2026-11-24T10:48:42Z",
+          "completedAt": "2026-11-26T10:27:28Z",
           "conclusion": "success",
           "name": "Run actions/setup-python@v5",
           "number": 6,
-          "startedAt": "2026-11-24T10:48:41Z",
+          "startedAt": "2026-11-26T10:27:28Z",
           "status": "completed"
         },
         {
-          "completedAt": "2026-11-24T10:48:42Z",
+          "completedAt": "2026-11-26T10:27:28Z",
           "conclusion": "success",
           "name": "Run moon fmt --check",
           "number": 7,
-          "startedAt": "2026-11-24T10:48:42Z",
+          "startedAt": "2026-11-26T10:27:28Z",
           "status": "completed"
         },
         {
-          "completedAt": "2026-11-24T10:48:42Z",
+          "completedAt": "2026-11-26T10:27:29Z",
           "conclusion": "success",
           "name": "Run moon check --target all --deny-warn",
           "number": 8,
-          "startedAt": "2026-11-24T10:48:42Z",
+          "startedAt": "2026-11-26T10:27:28Z",
           "status": "completed"
         },
         {
-          "completedAt": "2026-11-24T10:49:01Z",
+          "completedAt": "2026-11-26T10:27:41Z",
           "conclusion": "success",
           "name": "Run moon test --target all --deny-warn",
           "number": 9,
-          "startedAt": "2026-11-24T10:48:42Z",
+          "startedAt": "2026-11-26T10:27:29Z",
           "status": "completed"
         },
         {
-          "completedAt": "2026-11-24T10:49:02Z",
+          "completedAt": "2026-11-26T10:27:41Z",
           "conclusion": "success",
           "name": "Run moon run cmd/demo --target js --deny-warn",
           "number": 10,
-          "startedAt": "2026-11-24T10:49:01Z",
+          "startedAt": "2026-11-26T10:27:41Z",
           "status": "completed"
         },
         {
-          "completedAt": "2026-11-24T10:49:03Z",
+          "completedAt": "2026-11-26T10:27:42Z",
           "conclusion": "success",
           "name": "Run python scripts/count_loc.py --minimum 4000",
           "number": 11,
-          "startedAt": "2026-11-24T10:49:02Z",
+          "startedAt": "2026-11-26T10:27:41Z",
           "status": "completed"
         },
         {
-          "completedAt": "2026-11-24T10:49:08Z",
+          "completedAt": "2026-11-26T10:27:47Z",
           "conclusion": "success",
           "name": "Run python -m pip install --target work/pydeps -r scripts/requirements-dev.txt",
           "number": 12,
-          "startedAt": "2026-11-24T10:49:03Z",
+          "startedAt": "2026-11-26T10:27:42Z",
           "status": "completed"
         },
         {
-          "completedAt": "2026-11-24T10:49:47Z",
+          "completedAt": "2026-11-26T10:28:30Z",
           "conclusion": "success",
           "name": "Run python scripts/interop.py",
           "number": 13,
-          "startedAt": "2026-11-24T10:49:08Z",
+          "startedAt": "2026-11-26T10:27:47Z",
           "status": "completed"
         },
         {
-          "completedAt": "2026-11-24T10:49:49Z",
+          "completedAt": "2026-11-26T10:28:35Z",
+          "conclusion": "success",
+          "name": "Official reference golden inputs (live Windows decoder is separate)",
+          "number": 14,
+          "startedAt": "2026-11-26T10:28:30Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-26T10:28:39Z",
           "conclusion": "success",
           "name": "Run python scripts/test_file_cli.py",
-          "number": 14,
-          "startedAt": "2026-11-24T10:49:47Z",
+          "number": 15,
+          "startedAt": "2026-11-26T10:28:35Z",
           "status": "completed"
         },
         {
-          "completedAt": "2026-11-24T10:49:49Z",
+          "completedAt": "2026-11-26T10:28:39Z",
           "conclusion": "success",
           "name": "Generated interface drift",
-          "number": 15,
-          "startedAt": "2026-11-24T10:49:49Z",
+          "number": 16,
+          "startedAt": "2026-11-26T10:28:39Z",
           "status": "completed"
         },
         {
-          "completedAt": "2026-11-24T10:49:49Z",
+          "completedAt": "2026-11-26T10:28:39Z",
           "conclusion": "success",
           "name": "Post Run actions/setup-python@v5",
-          "number": 28,
-          "startedAt": "2026-11-24T10:49:49Z",
+          "number": 30,
+          "startedAt": "2026-11-26T10:28:39Z",
           "status": "completed"
         },
         {
-          "completedAt": "2026-11-24T10:49:49Z",
+          "completedAt": "2026-11-26T10:28:39Z",
           "conclusion": "success",
           "name": "Post Run actions/setup-node@v4",
-          "number": 29,
-          "startedAt": "2026-11-24T10:49:49Z",
+          "number": 31,
+          "startedAt": "2026-11-26T10:28:39Z",
           "status": "completed"
         },
         {
-          "completedAt": "2026-11-24T10:49:50Z",
+          "completedAt": "2026-11-26T10:28:39Z",
           "conclusion": "success",
           "name": "Post Run actions/checkout@v4",
-          "number": 30,
-          "startedAt": "2026-11-24T10:49:49Z",
+          "number": 32,
+          "startedAt": "2026-11-26T10:28:39Z",
           "status": "completed"
         },
         {
-          "completedAt": "2026-11-24T10:49:50Z",
+          "completedAt": "2026-11-26T10:28:39Z",
           "conclusion": "success",
           "name": "Complete job",
-          "number": 31,
-          "startedAt": "2026-11-24T10:49:50Z",
+          "number": 33,
+          "startedAt": "2026-11-26T10:28:39Z",
           "status": "completed"
         }
       ],
-      "url": "https://github.com/SUNhuixin-2007/MoonJLS/actions/runs/45378238917/job/138390125042"
+      "url": "https://github.com/SUNhuixin-2007/MoonJLS/actions/runs/45801454784/job/139845429630"
     }
   ],
   "status": "completed",
-  "updatedAt": "2026-11-24T10:49:52Z",
-  "url": "https://github.com/SUNhuixin-2007/MoonJLS/actions/runs/45378238917",
+  "url": "https://github.com/SUNhuixin-2007/MoonJLS/actions/runs/45801454784",
   "test_summary_lines": [
-    "2026-11-24T10:49:00.7886451Z Total tests: 46, passed: 46, failed: 0. [wasm]",
-    "2026-11-24T10:49:01.0561144Z Total tests: 46, passed: 46, failed: 0. [wasm-gc]",
-    "2026-11-24T10:49:01.5295950Z Total tests: 46, passed: 46, failed: 0. [js]",
-    "2026-11-24T10:49:01.9167431Z Total tests: 46, passed: 46, failed: 0. [native]"
+    "moonbit\tRun moon test --target all --deny-warn\t2026-11-26T10:27:39.9840639Z Total tests: 50, passed: 50, failed: 0. [wasm]",
+    "moonbit\tRun moon test --target all --deny-warn\t2026-11-26T10:27:40.3695779Z Total tests: 50, passed: 50, failed: 0. [wasm-gc]",
+    "moonbit\tRun moon test --target all --deny-warn\t2026-11-26T10:27:41.0036116Z Total tests: 50, passed: 50, failed: 0. [js]",
+    "moonbit\tRun moon test --target all --deny-warn\t2026-11-26T10:27:41.6256632Z Total tests: 50, passed: 50, failed: 0. [native]",
+    "moonbit\tOfficial reference golden inputs (live Windows decoder is separate)\t2026-11-26T10:28:35.7661757Z PASS_GOLDEN_INPUT_ONLY: 144 independent incoming vectors; live outgoing reference unavailable (not claimed)",
+    "moonbit\tRun python scripts/test_file_cli.py\t2026-11-26T10:28:39.2448960Z PASS: 14 real-file scenarios including overwrite protection and failed-output cleanup"
   ]
 }

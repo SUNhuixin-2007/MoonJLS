@@ -39,7 +39,7 @@ Windows 原生运行未验证，当前环境没有可用的 MSVC C++ 编译/链�
 
 ## 2026-11-26 本轮改进与证据
 
-本轮面向计划版本 0.2.0，解除 v0.1.x 的满范围 MAXVAL 守卫，保留原始 MAXVAL 并按规范推导 RANGE/qbpp/bpp/LIMIT，补充数值限幅、低值边界及 P 大于实际样本所需位数的测试。首版限制是阶段性工程选择，不是 T.87 的规定；最终目标为完整 Part 1 基线符合性，见 [BASELINE_PLAN.md](BASELINE_PLAN.md)。
+本轮对应版本 0.2.0，解除 v0.1.x 的满范围 MAXVAL 守卫，保留原始 MAXVAL 并按规范推导 RANGE/qbpp/bpp/LIMIT，补充数值限幅、低值边界及 P 大于实际样本所需位数的测试。首版限制是阶段性工程选择，不是 T.87 的规定；最终目标为完整 Part 1 基线符合性，见 [BASELINE_PLAN.md](BASELINE_PLAN.md)。
 
 - 测试清单新增 4 项，从 46 项增至每后端 50 项；各后端执行结果和当前核心代码规模以本轮 `LOCAL_VALIDATION.json` 记录为准，不沿用上面的历史行数。
 - 官方 T.87 独立参考程序：144 组输入解码、144 组输出独立解码通过，范围是合成灰度 MAXVAL 向量，不能写成官方 Annex E 全部通过。MAXVAL=1/2 因旧参考 EXE 不接受，由规范手推向量单独验证。

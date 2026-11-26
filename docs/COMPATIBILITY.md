@@ -1,6 +1,6 @@
 # 兼容性边界
 
-基准为 ITU-T T.87 / ISO/IEC 14495-1 baseline。最终目标是完整基线符合性，当前实现及证据仍有下列缺口，没有通过官方一致性认证。完整目标、标准条款与阶段门槛见 [BASELINE_PLAN.md](BASELINE_PLAN.md)；CharLS 的全部能力不自动构成本工程的能力。本轮修改面向计划版本 0.2.0，发布状态另见 [SUBMISSION_STATUS.md](SUBMISSION_STATUS.md)。
+基准为 ITU-T T.87 / ISO/IEC 14495-1 baseline。最终目标是完整基线符合性，当前实现及证据仍有下列缺口，没有通过官方一致性认证。完整目标、标准条款与阶段门槛见 [BASELINE_PLAN.md](BASELINE_PLAN.md)；CharLS 的全部能力不自动构成本工程的能力。本轮修改对应版本 0.2.0，发布状态另见 [SUBMISSION_STATUS.md](SUBMISSION_STATUS.md)。
 
 | 功能 | 已实现的范围 | 验证方式 |
 | --- | --- | --- |
