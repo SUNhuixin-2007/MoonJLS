@@ -425,19 +425,22 @@ test "reusable row copies preserve selection and reject invalid calls atomically
 }
 
 ///|
-test "non-full-range MAXVAL is explicitly outside the interoperable codec profile" {
-  let image = integration_image(3, 2, 10, 1)
-  expect_jls_error(() => {
-    ignore(
-      encode(image, options={
-        ..EncodeOptions::default(),
-        preset: { ..Preset::automatic(), maximum: 1000, },
-      }),
-    )
+test "non-full-range MAXVAL is retained in codestreams and row sources" {
+  let image : Image = {
+    frame: { width: 3, height: 2, bits_per_sample: 10, components: 1, },
+    samples: [0, 1000, 47, 255, 256, 999],
+  }
+  let bytes = encode(image, options={
+    ..EncodeOptions::default(),
+    preset: { ..Preset::automatic(), maximum: 1000, },
   })
+  assert_eq(inspect(bytes[:]).scans[0].preset.maximum, 1000)
+  assert_eq(decode(bytes[:]), image)
   let pnm = PnmSource::open(ByteSource::from_bytes(b"P5\n1 1\n1000\n\x00\x01"))
   assert_eq(pnm.row(0), [1])
-  expect_jls_error(() => ignore(pnm.encode()))
+  let coded = pnm.encode()
+  assert_eq(inspect(coded[:]).scans[0].preset.maximum, 1000)
+  assert_eq(decode(coded[:]).samples, [1])
 }
 
 ///|

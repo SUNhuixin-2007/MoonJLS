@@ -23,6 +23,7 @@ MoonBit 的数据类型、错误模型、受限位流、容器解析与写出、
 ## 标准与验证依赖
 
 - [ITU-T T.87](https://www.itu.int/rec/T-REC-T.87/en)，对应 ISO/IEC 14495-1:1999：用于核对 JPEG-LS baseline 的标记、预测和编码语义。仅引用链接，不把标准全文作为项目自有文档分发。
+- T.87 官方附件 JPEG-LS Reference Software V1.00X（1999-03-04）：仅用于本项目的标准符合性测试，包含 HP/ISO/IEC/ITU 的测试用途许可，**不是 BSD 产品代码**。原始软件、许可、PDF 和官方图集保存在忽略的 `work/standards`，不随本库分发。`scripts/t87_interop.py` 记录官方来源及逐个 EXE 的摘要；公开 `fixtures/t87-maxval` 是本项目自建合成输入产生的验证向量。参考程序 MAXVAL=1/2 及低 MAXVAL 近无损隐式默认值的限制在 [MAXVAL_EVIDENCE.md](docs/MAXVAL_EVIDENCE.md) 单列。
 - [imagecodecs](https://github.com/cgohlke/imagecodecs) **2026.11.11**：BSD-3-Clause，独立验证依赖；其 JPEG-LS 模块调用所附 CharLS。实际 CharLS 和 NumPy 版本由运行记录获取，不从版本名称猜测。
 - NumPy：BSD-3-Clause，用于在独立验证脚本中构造和比较整数图像。
 - MoonBit 标准库：Apache-2.0，以工具链随附版本及 `moon.pkg` 实际导入为准。
@@ -32,7 +33,7 @@ Python 与原生 CharLS 仅用于开发验证，不是编译后 MoonBit 核心�
 
 ## 测试数据与 AI
 
-`fixtures/` 使用本项目公开定义的合成样本：常量、渐变、棋盘、重复游程和确定性伪随机值。由独立 CharLS 编码生成码流，记录原样本、重建值及摘要；没有采用患者数据、企业图像、授权不明的标准测试图集或外部真实日志。
+`fixtures/` 使用本项目公开定义的合成样本：常量、渐变、棋盘、重复游程和确定性伪随机值。由独立 CharLS 或官方 T.87 参考程序编码生成码流，记录原样本、重建值及摘要；没有将官方符合性图集、患者数据、企业图像或外部真实日志并入公开向量。
 
 AI 参与了检索、移植适配、接口、测试和文档。标准与上游实现才是算法依据；AI 输出仍须通过类型检查、标准字段核对和独立互操作。维护者应能够解释状态更新、位流边界、误差保证与不支持项，不把 AI 生成本身当作正确性证据。
 

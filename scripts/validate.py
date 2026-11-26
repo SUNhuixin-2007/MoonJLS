@@ -70,7 +70,7 @@ def main() -> None:
     target.write_text(json.dumps({"result": "RUNNING", "started_at": datetime.now(timezone(timedelta(hours=8))).isoformat()}, indent=2) + "\n", encoding="utf-8")
     before = fingerprint()
     checks = []
-    for name in ("interop.json", "file_cli.json"):
+    for name in ("interop.json", "file_cli.json", "t87-maxval.json"):
         (LOGS / name).unlink(missing_ok=True)
     commands = [
         ("format", ["moon", "fmt", "--check"]),
@@ -82,6 +82,7 @@ def main() -> None:
         ("interfaces", ["moon", "info"]),
         ("source_scale", [sys.executable, "scripts/count_loc.py", "--minimum", "4000"]),
         ("independent_interop", [sys.executable, "scripts/interop.py"]),
+        ("t87_maxval", [sys.executable, "scripts/t87_interop.py"]),
         ("file_cli", [sys.executable, "scripts/test_file_cli.py"]),
     ]
     for name, command in commands:
@@ -111,12 +112,14 @@ def main() -> None:
             "Native execution is not validated on this Windows host without MSVC C++ compiler and SDK",
             "Interleaved two-component scans have local tests only; CharLS reference rejects them",
             "Sample interleave with non-default RESET has local tests only; external sample cases use RESET=64",
-            "MAXVAL must equal 2^bits_per_sample - 1; other values fail explicitly",
+            "Arbitrary MAXVAL live independent evidence is stratified grayscale; MAXVAL 1/2 use standard-derived vectors because the official reference rejects them",
+            "Full baseline conformance remains a final project goal; mapping tables, point transform, subsampling, DNL and wider DRI are not yet implemented",
             "Restart/custom-threshold/push encoder cases use independent CharLS decoding; the wrapper cannot generate those exact combinations",
             "Synthetic vectors are not a complete conformance certification or a real clinical/production corpus",
             "Remote CI execution status is recorded separately in docs/SUBMISSION_STATUS.md",
         ],
         "interop": json.loads((LOGS / "interop.json").read_text(encoding="utf-8")) if (LOGS / "interop.json").exists() else None,
+        "t87_maxval": json.loads((LOGS / "t87-maxval.json").read_text(encoding="utf-8")) if (LOGS / "t87-maxval.json").exists() else None,
         "file_cli": json.loads((LOGS / "file_cli.json").read_text(encoding="utf-8")) if (LOGS / "file_cli.json").exists() else None,
     }
     report["result"] = "FAIL" if any(check["status"] == "FAIL" for check in checks) else "PASS_WITH_LIMITATIONS"

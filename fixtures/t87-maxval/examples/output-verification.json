@@ -1,0 +1,62 @@
+{
+  "recorded_at": "2026-11-26T18:14:37.179831+08:00",
+  "reference": {
+    "name": "ITU-T T.87 accompanying JPEG-LS Reference Software V1.00X (1999-03-04)",
+    "source": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-T.87-199806-I!!ZPF-E&lang=e&type=items",
+    "inner_archive": "jlsrefV100.zip",
+    "inner_archive_sha256": "085285f0552ef0b6ebcf29bc5a6d3bc0d6bda0408e9f2f1c138be2e55200814f",
+    "binary_sha256": {
+      "loco16d.exe": "f080d7cd7722ffbbd4e8887a229cb023e2c7ca471a69f6730d2ac41a09a6e7f5",
+      "loco16e.exe": "a0573719d3b76d980d80c50fe51fdaf806267c54c58eacf720dc8f79fd4c2766",
+      "locod.exe": "36516cba57c7706a76d9ae3f21c4e35f2b3bd1a7a0ef7ca0f0124f18b78015c0",
+      "locoe.exe": "20c3e1f2e61464438c6e348bdb187d17d1ea25d44c5a429bca948fad0426c699",
+      "nloco16d.exe": "84682e13e6a12cd60e758cfd8d4c1c4c82d49bd415b76ae0c58a745bc71e4b00",
+      "nloco16e.exe": "516ca3ca2093e62e8c9596c5f9927933a442af1305dbea0cd7921842ad0ce32e",
+      "nlocod.exe": "7cbc4c9506c9031a53b863793ad27c6bcb90f83c7fa257c53a90e83c5a6d5e86",
+      "nlocoe.exe": "706a81309493b6a8edeb3cb1cbfce810282aa05daeca22ae58af296bcf7ee3c3"
+    },
+    "license": "HP/ISO/IEC/ITU testing-product-conformance-only; original binaries and notices remain in ignored work/ and are not redistributed",
+    "known_limits": [
+      "MAXVAL 1/2 are rejected by the reference executable",
+      "For MAXVAL<128 with NEAR>0 these vectors use explicit legal thresholds/RESET. The legacy reference implicit threshold defaults differ from final T.87 C.5; they are not treated as standard-default evidence."
+    ]
+  },
+  "bridge_js_sha256": "f11ab77892a4c7fed559d626f4462faf3ab4b5b151f04c4c10a7a5f6a0f5f36e",
+  "verification": "Live official reference decoder checked both MoonJLS output codestreams; maximal error <= NEAR",
+  "examples": [
+    {
+      "label": "max1000-near0-noise",
+      "maximum": 1000,
+      "near": 0,
+      "incoming": "PASS",
+      "incoming_reference_sha256": "125ea38574d90494ef2de44043362db82c361d7bbc2da80b9c444e528a209c95",
+      "outgoing": "PASS",
+      "outgoing_sha256": "125ea38574d90494ef2de44043362db82c361d7bbc2da80b9c444e528a209c95",
+      "outgoing_maximum_error": 0,
+      "files": {
+        "max1000-near0-input.pgm": "7b275d0d7f4b43e5a5eabc81d366321db7291ec946eee0096dad8200a2168aae",
+        "max1000-near0-moonjls-reference-decoded.pgm": "7b275d0d7f4b43e5a5eabc81d366321db7291ec946eee0096dad8200a2168aae",
+        "max1000-near0-moonjls.jls": "125ea38574d90494ef2de44043362db82c361d7bbc2da80b9c444e528a209c95",
+        "max1000-near0-reference-decoded.pgm": "7b275d0d7f4b43e5a5eabc81d366321db7291ec946eee0096dad8200a2168aae",
+        "max1000-near0-reference.jls": "125ea38574d90494ef2de44043362db82c361d7bbc2da80b9c444e528a209c95"
+      }
+    },
+    {
+      "label": "max1000-near3-noise",
+      "maximum": 1000,
+      "near": 3,
+      "incoming": "PASS",
+      "incoming_reference_sha256": "749a052c15457a3d58384dc4a27fcc99a3060bc2378d10e9b9d8219a00eee4c6",
+      "outgoing": "PASS",
+      "outgoing_sha256": "749a052c15457a3d58384dc4a27fcc99a3060bc2378d10e9b9d8219a00eee4c6",
+      "outgoing_maximum_error": 3,
+      "files": {
+        "max1000-near3-input.pgm": "7b275d0d7f4b43e5a5eabc81d366321db7291ec946eee0096dad8200a2168aae",
+        "max1000-near3-moonjls-reference-decoded.pgm": "63e9dd52339b423b61ebaf2c1837a8f709e38169ad8d22c12364fbeb969557ca",
+        "max1000-near3-moonjls.jls": "749a052c15457a3d58384dc4a27fcc99a3060bc2378d10e9b9d8219a00eee4c6",
+        "max1000-near3-reference-decoded.pgm": "63e9dd52339b423b61ebaf2c1837a8f709e38169ad8d22c12364fbeb969557ca",
+        "max1000-near3-reference.jls": "749a052c15457a3d58384dc4a27fcc99a3060bc2378d10e9b9d8219a00eee4c6"
+      }
+    }
+  ]
+}

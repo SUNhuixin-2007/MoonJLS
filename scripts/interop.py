@@ -200,7 +200,7 @@ def main() -> None:
                          "restart intervals (outgoing)", "push encoder (outgoing)", "explicit full-range MAXVAL/custom T1/T2/T3/RESET (outgoing)"], "reference_limits": ["imagecodecs encoding rejects two-channel input shapes",
                            "CharLS decoding rejects interleaved two-channel scans",
                            "sample interleave plus non-default RESET has local tests only; external sample tests use RESET=64",
-                           "non-full-range MAXVAL is explicitly unsupported by MoonJLS public codec profile"], "result": "PASS"}
+                           "This legacy CharLS suite uses full-range MAXVAL; arbitrary MAXVAL is verified separately against the official T.87 reference"], "result": "PASS"}
     output = ROOT / "work" / "validation" / "interop.json"
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")

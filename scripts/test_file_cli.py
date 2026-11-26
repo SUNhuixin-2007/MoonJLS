@@ -89,6 +89,21 @@ def main() -> None:
             assert restored.read_bytes() == source.read_bytes()
             checks.append(f"wide PNM/JPEG-LS {width}x1 {bits}-bit exact roundtrip")
 
+        for maximum in (128, 256, 1000, 65534):
+            source = base / f"custom-max-{maximum}.pgm"
+            packed = base / f"custom-max-{maximum}.jls"
+            restored = base / f"custom-max-{maximum}-restored.pgm"
+            pixels = np.array([0, maximum, maximum - 1, 1, maximum // 2, 17 % (maximum + 1)], dtype=np.uint16)
+            payload = pixels.astype("u1" if maximum < 256 else ">u2").tobytes()
+            header = f"P5\n3 2\n{maximum}\n".encode("ascii")
+            source.write_bytes(header + payload)
+            call("encode", source, packed)
+            inspected = call("inspect", packed)
+            assert inspected["info"]["scans"][0]["preset"]["maximum"] == maximum
+            call("decode", packed, restored)
+            assert restored.read_bytes() == source.read_bytes()
+            checks.append(f"non-full MAXVAL={maximum} real-file lossless roundtrip; independent coverage is in t87_interop")
+
         ascii_source = base / "ascii.pgm"
         ascii_source.write_bytes(b"P2\n3 1\n255\n0 10 255\n")
         ascii_wire = base / "ascii.jls"
@@ -99,7 +114,7 @@ def main() -> None:
         assert ascii_pam.read_bytes().endswith(b"ENDHDR\n\x00\x0a\xff")
         checks.append("ASCII input and explicit PAM export")
 
-        for index, data in enumerate([b"P5\n2 2\n255\n\x00", b"P5\n1 1\n1000\n\x00\x01",
+        for index, data in enumerate([b"P5\n2 2\n255\n\x00", b"P5\n1 1\n1000\n\x03\xe9",
                                       b"\xff\xd8\xff", b"not an image"]):
             source = base / f"broken-{index}"
             destination = base / f"must-not-remain-{index}"
@@ -109,7 +124,7 @@ def main() -> None:
         invalid = base / "invalid-option.jls"
         call("encode", ascii_source, invalid, "--near", 999, good=False)
         assert not invalid.exists()
-        checks.append("truncated/invalid inputs, unsupported MAXVAL, option rejection and partial-output cleanup")
+        checks.append("truncated/invalid inputs, samples exceeding MAXVAL, option rejection and partial-output cleanup")
 
     report = {"result": "PASS", "cases": checks, "independent": imagecodecs.jpegls_version(),
               "scope": "Real temporary files, Unicode paths, compiled MoonBit codec; Node performs I/O only"}

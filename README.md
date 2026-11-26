@@ -1,6 +1,6 @@
 # MoonJLS
 
-[GitHub CI](https://github.com/SUNhuixin-2007/MoonJLS/actions/runs/45378238917) · [Mooncakes](https://mooncakes.io/docs/SHX-ai-nb/moonjls)
+[GitHub CI](https://github.com/SUNhuixin-2007/MoonJLS/actions/workflows/check.yml) · [Mooncakes](https://mooncakes.io/docs/SHX-ai-nb/moonjls)
 
 MoonJLS 是 **纯 MoonBit JPEG-LS 无损与近无损图像编解码库**。它直接处理 2–16 位无符号样本，按 JPEG-LS 的预测、上下文统计和 Golomb 熵编码压缩图像；常见使用对象是科研灰度图、多通道原始图像和需要保留整数样本的 Wasm 工具。
 
@@ -8,7 +8,7 @@ MoonJLS 是 **纯 MoonBit JPEG-LS 无损与近无损图像编解码库**。它�
 
 ## 实现方式
 
-项目是 **CharLS 2.4.2 的受限范围 MoonBit 移植与工程适配**，不是原生库绑定。移植保留成熟实现中 regular/run 模式的上下文演化和样本重建规则，采用 MoonBit 的位流、类型、错误和资源约束接口；编译后的核心不调用 CharLS、Python 或 C FFI。具体文件与来源见 [THIRD_PARTY.md](THIRD_PARTY.md)。
+项目是 **CharLS 2.4.2 的 MoonBit 移植与工程适配**。最终目标是 **ITU-T T.87 / ISO/IEC 14495-1 完整 JPEG-LS 基线标准符合性**，当前实现、未完成事项和验收路线逐项列在 [基线目标](docs/BASELINE_PLAN.md)。移植保留成熟实现中 regular/run 模式的上下文演化和样本重建规则，采用 MoonBit 的位流、类型、错误和资源约束接口；编译后的核心不调用 CharLS、Python 或 C FFI。具体文件与来源见 [THIRD_PARTY.md](THIRD_PARTY.md)。
 
 JPEG-LS 与普通 JPEG 的核心方法不同：它按邻域中值预测样本、量化梯度选择上下文、适应性更新预测偏差，并使用 regular/run 两种编码路径。JPEG-LS 不使用普通 JPEG 的 DCT/量化质量参数，`NEAR` 明确限制每个样本允许的绝对误差。
 
@@ -41,7 +41,7 @@ node scripts/moonjls.mjs decode output.jls restored.pam --pam
 
 输出必须是尚不存在的文件；失败会清理本次创建的部分输出。灰度/RGB 可用 PNM，Alpha 可用 PAM。二进制 P5/P6 编码按行读入；多分量 none 会回访输入并保留压缩输出。PAM/ASCII 编码及文件解码物化整图，报告如实标记。`inspect` 只检查结构，返回 `entropy_validated=false`；完整 `decode` 才验证熵数据与零填充。
 
-首版 JPEG-LS 的 MAXVAL 必须为 `2^bits−1`，非满范围 MAXVAL 显式拒绝。两通道文件默认用 none，其他限制见兼容性表。
+v0.2.0 支持合法 `1 ≤ MAXVAL < 2^P`，不再沿用 v0.1.x 的满范围限制。PGM 的 MAXVAL=1000 会写为实际 LSE1.MAXVAL，不会改成 1023 或缩放像素。输入、双向码流、官方参考重建值见 [MAXVAL 证据](docs/MAXVAL_EVIDENCE.md)。两通道文件默认用 none，当前其它限制见兼容性表。
 
 ## 库接口
 
@@ -63,7 +63,7 @@ let options = { ..@jls.EncodeOptions::default(), near: 3 }
 let packed = @jls.encode(original, options~)
 ```
 
-在自己的 `moon.pkg` 中导入 `"SHX-ai-nb/moonjls" @jls`；安装命令为 `moon add SHX-ai-nb/moonjls@0.1.1`。
+在自己的 `moon.pkg` 中导入 `"SHX-ai-nb/moonjls" @jls`；安装命令为 `moon add SHX-ai-nb/moonjls@0.2.0`。
 
 ## 独立验证
 
@@ -72,6 +72,7 @@ let packed = @jls.encode(original, options~)
 ```sh
 python -m pip install --target work/pydeps -r scripts/requirements-dev.txt
 python scripts/interop.py
+python scripts/t87_interop.py --golden-only
 ```
 
 独立向量只使用公开合成图像；不含车辆日志、患者资料或商业图像。测试范围与限制见 [docs/VALIDATION.md](docs/VALIDATION.md)。一键复现完整本地检查：
@@ -80,7 +81,7 @@ python scripts/interop.py
 python scripts/validate.py
 ```
 
-记录包含三个运行目标各 46 项测试、独立编解码验证与真实文件测试；Windows native 未执行，远程 CI 与发布进度见 [发布状态](docs/SUBMISSION_STATUS.md)。
+记录包含三个运行目标各 50 项测试、CharLS 282 组双向与 80 组扩展、官方参考 144 组 MAXVAL 双向验证及 14 类真实文件场景。Linux CI 只核对已提交的官方黄金输入；Windows 现场双向证据另列，不能混计。Windows native 未执行，远程 CI 与发布进度见 [发布状态](docs/SUBMISSION_STATUS.md)。
 
 ## 源码规模
 
@@ -89,11 +90,12 @@ python scripts/count_loc.py
 python scripts/count_loc.py --minimum 4000
 ```
 
-统计将核心、测试、示例工具分开，排除依赖、构建、生成接口、注释和空行；严格口径进一步排除纯结构符号。当前严格有效核心为 **4,118 行**，非空非注释核心为 5,178 行。精确口径与逐文件统计保存在 [本地验证记录](docs/LOCAL_VALIDATION.json)，不承诺主办方采用相同计数方式。
+统计将核心、测试、示例工具分开，排除依赖、构建、生成接口、注释和空行；严格口径进一步排除纯结构符号。当前严格有效核心为 **4,115 行**，非空非注释核心为 5,173 行。精确口径与逐文件统计保存在 [本地验证记录](docs/LOCAL_VALIDATION.json)，不承诺主办方采用相同计数方式。
 
 ## 资料与授权
 
 - [技术路线](docs/TECHNICAL_DESIGN.md)：解释算法状态、码流边界、重建样本与资源预算。
+- [完整基线目标](docs/BASELINE_PLAN.md) 与 [MAXVAL 输入输出证据](docs/MAXVAL_EVIDENCE.md)：说明首版限制、最终范围和阶段验收。
 - [功能与限制](docs/COMPATIBILITY.md)：明确支持项与不支持项。
 - [来源与移植范围](THIRD_PARTY.md)：上游版本、版权及依赖。
 - [BSD-3-Clause](LICENSE)：项目许可；保留的 CharLS 原许可见 [docs/CHARLS-LICENSE.md](docs/CHARLS-LICENSE.md)。

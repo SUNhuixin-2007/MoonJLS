@@ -13,18 +13,22 @@ moon run cmd/demo --target js
 python scripts/count_loc.py --minimum 4000
 python -m pip install --target work/pydeps -r scripts/requirements-dev.txt
 python scripts/interop.py
+python scripts/t87_interop.py --golden-only
+python scripts/test_file_cli.py
 ```
 
-2026-11-24 的完整执行记录为 [LOCAL_VALIDATION.json](LOCAL_VALIDATION.json)，结果 `PASS_WITH_LIMITATIONS`：
+2026-11-26 的完整本地执行记录为 [LOCAL_VALIDATION.json](LOCAL_VALIDATION.json)，各命令退出码及来源指纹保存在其中。`PASS_WITH_LIMITATIONS` 仅代表当前范围测试通过，完整基线目标尚需按 [BASELINE_PLAN.md](BASELINE_PLAN.md) 继续验收：
 
 | 检查 | 实测结果 |
 | --- | --- |
 | 编译/格式 | `moon check --target all --deny-warn`、`moon fmt --check`、`moon info` 通过 |
-| Wasm / Wasm-GC / JS | 每个目标 46 项测试全部通过（同一套测试在三个后端执行，不写成 138 个独立用例） |
+| Wasm / Wasm-GC / JS | 每个目标 50 项测试（同一套测试在三个后端执行，不合并成独立用例数） |
 | 独立双向 | 282 组图像；CharLS → MoonJLS 与 MoonJLS → CharLS，逐样本核对 |
 | 扩展独立解码 | 80 组；重启、推送编码、自定义阈值与 RESET；只计有对应外部解码证据的组合 |
-| 真实文件 | 10 类场景，含中文路径、8/12/16 位、Alpha、近无损、拒绝覆盖与失败输出清理 |
-| 生产规模 | 5,798 物理行；5,178 非空非注释行；4,118 严格有效核心行 |
+| 官方 MAXVAL 双向 | 144 组官方参考输入解码＋144 组本库输出由官方解码；Windows 现场执行，Linux CI 只检查固定官方输入 |
+| 官方附件解码 | 12 个文件中 10 个解码通过、2 个异采样缺口；汇总 PARTIAL，编码器符合性未执行，来源限制见 [ANNEX_E_STATUS.md](ANNEX_E_STATUS.md) |
+| 真实文件 | 14 类场景，含中文路径、8/12/16 位、Alpha、非满 MAXVAL、近无损、拒绝覆盖与失败输出清理 |
+| 生产规模 | 5,793 物理行；5,173 非空非注释行；4,115 严格有效核心行 |
 | Windows native | NOT_RUN：缺少 MSVC C++ 编译/链接工具和 SDK |
 | 远程 CI | 运行链接及结论见 SUBMISSION_STATUS.md，与本地记录分开 |
 
@@ -33,6 +37,8 @@ python scripts/interop.py
 ## 独立 oracle
 
 固定 `imagecodecs==2026.11.11`，运行时报告的引擎为 `charls 2.4.5`。算法移植依据另为 CharLS 2.4.2，来源版本与验证版本分别披露。Python 和 NumPy 只构造公开整数样本与比较数组，不重写一份 JPEG-LS 参考解析器。
+
+任意 MAXVAL 独立验证改用 T.87 官方附件参考程序，版本、SHA-256、逐方向结果及已知参考限制见 [MAXVAL_EVIDENCE.md](MAXVAL_EVIDENCE.md) 和 [T87_MAXVAL_VALIDATION.json](T87_MAXVAL_VALIDATION.json)。这 144 组与旧 CharLS 矩阵分开计数；MAXVAL=1/2 的规范派生短向量不计作外部程序验证。官方近无损语料不仅检查误差界，还逐样本比较独立参考的重建值。
 
 1. 构造阶跃/平坦游程、渐变、确定性噪声、零/最大值边界与超宽图像，保留所有输入样本。
 2. 独立 CharLS 编码，保存 `.jls` 字节和独立解码的重建值。
@@ -56,7 +62,7 @@ CI workflow 文件是复现入口，远程运行结果另外记录在 SUBMISSION
 
 - 两通道 none 有外部解码验证；line/sample 只有本地编码、解码与推送一致性测试，不能算入外部通过矩阵。
 - 自定义 T1/T2/T3 在 none/line/sample 均有独立解码向量；自定义 RESET 的外部证据限 none/line，sample 的外部测试使用 RESET=64。sample+RESET=13 的本地重建与推送一致性测试单列，不声称通过 CharLS。
-- 非满范围 MAXVAL 显式拒绝。探索性 MAXVAL=1000 外部解码没有得到一致像素，该结果没有纳入通过数量。
+- v0.1.x 曾拒绝非满范围 MAXVAL；v0.2.0 已解除并获得官方参考分层证据。旧 CharLS 282+80 仍是满范围矩阵，不能挪作非满范围验证；官方旧程序低 MAXVAL 近无损使用明确的自定义阈值，限制详见专门证据页。
 - 重启输出由 CharLS 独立解码；所用 Python 包装不提供相应编码参数，不能将它写成外部编码方向也覆盖了重启。HP 与 SPIFF 则有双向向量。
 - 语料为公开合成数据，没有正式一致性认证、真实医学工作流或生产图像全集的结论。
 
@@ -78,4 +84,6 @@ node scripts/moonjls.mjs decode fixtures/gray8.jls work/gray8.pgm
 
 验证脚本记录核心、测试、配置、脚本、fixtures 的内容指纹，检查运行前后未改变。日志开始先写 RUNNING，外部命令缺失会记录失败，避免旧通过记录被误当作本次结果。源码包没有 .git 目录也可生成同一内容指纹；已用独立临时副本验证这一点。
 
-八项申报材料完善时，另修复 SPIFF/EOD 跨越扫描位置和行输出回调重入两项独立边界问题，新增四项回归，当前总数为每后端 46 项；两项修复均在修改前复现失败，修改后通过。十次实质开发/工程提交的逐项职责见 COMMIT_AUDIT.md。
+八项申报材料完善时，另修复 SPIFF/EOD 跨越扫描位置和行输出回调重入两项独立边界问题，新增四项回归，当时总数为每后端 46 项；两项修复均在修改前复现失败，修改后通过。十次实质开发/工程提交的逐项职责见 COMMIT_AUDIT.md。
+
+2026-11-26 的 MAXVAL 扩展另新增四项分层测试（总数变为 50），并将原来拒绝 MAXVAL=1000 的用例改为精确往返验证。覆盖实际 MAXVAL 与帧精度独立、完整整数范围/误差约束、极小字母表规范向量、推送/重启和非法样本拒绝。最终符合性清单仍有未完成项，不能因这次测试通过而标为全部实现。

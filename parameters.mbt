@@ -107,11 +107,6 @@ pub fn Preset::resolve(
   guard maximum >= 1 && maximum <= bound else {
     raise Invalid(0, "preset MAXVAL exceeds precision")
   }
-  guard maximum == bound else {
-    raise Unsupported(
-      0, "this interoperable profile requires MAXVAL = 2^precision - 1",
-    )
-  }
   let defaults = Preset::defaults(maximum, near)
   let threshold1 = if self.threshold1 == 0 {
     defaults.threshold1
